@@ -8,3 +8,11 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
+
+CREATE TABLE "" (
+	"id" SERIAL PRIMARY KEY,
+);
+
+CREATE TABLE "" (
+	"id" SERIAL PRIMARY KEY,
+);
