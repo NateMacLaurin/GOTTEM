@@ -10,6 +10,7 @@ function AboutPage() {
     <div className="container">
       <div>
         <p>This about page is for anyone to read!</p>
+        <p>This page will contain information about the App and how to use it.</p>
       </div>
     </div>
   );

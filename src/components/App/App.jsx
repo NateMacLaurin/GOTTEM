@@ -44,7 +44,6 @@ function App() {
             path="/about"
           >
             <AboutPage />
-          </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -100,6 +99,18 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
+          </ProtectedRoute>
+
+          </ProtectedRoute>
+            // with authRedirect:
+            // - if logged in, redirects to "/user"
+            // - else shows LandingPage at "/home"
+            // shows InventoryPage
+
+            exact
+            path="/inventory"
+          >
+            <AboutPage />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
