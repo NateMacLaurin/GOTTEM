@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useParams } from "react-router-dom";
 
+
 function ItemPage(props) {
     //vars
   let { id } = useParams();
@@ -16,10 +17,14 @@ function ItemPage(props) {
   const [heading, setHeading] = useState('Item Component');
   const [asset, setAsset] = useState([]);
 
+  useEffect(() => {
+    dispatch({type: 'FETCH_MASTER_ITEM', payload: id});
+  }, [])
+
   return (
     <div>
       <h2>{heading}</h2>
-      <p>TYPE: {masterAsset?.type_name}</p>
+      <p>TYPE: {masterAsset[0]?.type_name}</p>
     </div>
   );
 }

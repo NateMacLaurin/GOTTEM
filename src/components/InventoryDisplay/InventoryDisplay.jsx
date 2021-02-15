@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import InventoryDisplayItem from '../InventoryDisplayItem/InventoryDisplayItem';
+import AddItemForm from '../AddItemForm/AddItemForm';
 import { Card, Button, ListGroup } from 'react-bootstrap';
+import './InventoryDisplay.css';
 import '../../bootstrap.min.css';
 
 function InventoryDisplay(props) {
@@ -24,27 +26,15 @@ function InventoryDisplay(props) {
         <div>
         <h2>{heading}</h2>
         <section className="masterTable">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Name</th>
-                        <th>IP</th>
-                        <th>MAC</th>
-                        <th>Status</th>
-                        <th>Location</th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.masterAssetStore.map((asset) => {
-                        return(
-                            <InventoryDisplayItem key={asset.id} asset={asset}/>
-                        );
-                    })};
-                </tbody>
-            </table>
+            {props.masterAssetStore.map((asset) => {
+                return(
+                    <Card key={asset.id} stype={{width: '14rem'}} onClick={() => {handleSelectItem(asset.id)}}>
+                        <InventoryDisplayItem asset={asset}/>
+                    </Card>
+                );
+            })}
         </section>
-        <InventoryDisplayItem />
+        <AddItemForm />
         </div>
     );
 }

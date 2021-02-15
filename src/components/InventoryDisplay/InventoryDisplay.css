@@ -1,0 +1,4 @@
+.masterTable {
+    display : flex;
+    flex-wrap: wrap;
+}
