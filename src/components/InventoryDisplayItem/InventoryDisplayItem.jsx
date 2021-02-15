@@ -8,14 +8,14 @@ function InventoryDisplayItem({asset}) {
 
 
     return (
-        <div>
-            <p>TYPE: {asset?.type_name}</p>
-            <p>NAME: {asset?.domain_name}</p>
-            <p>IP: {asset?.ipv4}</p>
-            <p>MAC: {asset?.mac_addr}</p>
-            <p>STATUS: {asset?.status_name}</p>
-            <p>LOCATION: {asset?.loc_name}</p>
-        </div>
+        <tr key={asset?.id}>
+            <td>{asset?.type_name}</td>
+            <td>{asset?.domain_name}</td>
+            <td>{asset?.ipv4}</td>
+            <td>{asset?.mac_addr}</td>
+            <td>{asset?.status_name}</td>
+            <td>{asset?.loc_name}</td>
+        </tr>
     );
 }
 

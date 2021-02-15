@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
       res.send(result.rows);
     })
     .catch(err => {
-      console.log('ERROR: Get movie by ID', err);
+      console.log('ERROR: Get asset by ID', err);
       res.sendStatus(500)
     })
 

@@ -7,21 +7,19 @@ function ItemPage(props) {
   let { id } = useParams();
     //if user clicks "Item Page", default to the first item in master inventory
   id ? id=id : id=1;
+    //hooks
+  const dispatch = useDispatch();
+  const masterAsset = useSelector((store) => store.masterAssetItem);
     //debug log
   console.log(`ID param of redirect: ${id}`);
     //states
   const [heading, setHeading] = useState('Item Component');
-    //hooks
-  const store = useSelector((store) => store);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch({type: 'GET_MASTER_ITEM', payload: id});
-  }, []);
+  const [asset, setAsset] = useState([]);
 
   return (
     <div>
       <h2>{heading}</h2>
+      <p>TYPE: {masterAsset?.type_name}</p>
     </div>
   );
 }
