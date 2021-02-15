@@ -9,9 +9,19 @@ router.get('/', (req, res) => {
   // GET route code here
   // debug server console log
   console.log(`In /api/type/ GET master`);
-  const query = `SELECT * from "assets_master" ORDER BY "local_name" ASC
-  `;
+  const query = `SELECT * FROM "assets_master"
+  JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+  JOIN "locations" ON "locations".id = "assets_master".location_id
+  JOIN "asset_status" ON "asset_status".id = "assets_master".status_id;`;
 
+  pool.query(query)
+    .then( result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR: Get all assets', err);
+      res.sendStatus(500)
+    });
 });
 
 /**

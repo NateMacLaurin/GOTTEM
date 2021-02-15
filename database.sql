@@ -83,3 +83,8 @@ SELECT * FROM "asset_status";
 
 INSERT INTO "asset_status" (status_name)
 VALUES ('in use'), ('in repair'), ('awaiting repair'), ('repaired'), ('in inventory'), ('damaged');
+
+SELECT * FROM "assets_master"
+JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+JOIN "locations" ON "locations".id = "assets_master".location_id
+JOIN "asset_status" ON "asset_status".id = "assets_master".status_id;
