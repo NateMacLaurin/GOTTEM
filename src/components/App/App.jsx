@@ -15,10 +15,13 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import InfoPage from '../InfoPage/InfoPage';
+import InventoryPage from '../InventoryPage/InventoryPage';
+import ItemPage from '../ItemPage/ItemPage';
+import AdminPage from '../AdminPage/AdminPage';
 
 import './App.css';
 
@@ -44,7 +47,7 @@ function App() {
             path="/about"
           >
             <AboutPage />
-
+          </Route>
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -55,14 +58,6 @@ function App() {
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
           </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will
@@ -101,7 +96,7 @@ function App() {
             <LandingPage />
           </ProtectedRoute>
 
-          </ProtectedRoute>
+          <ProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows LandingPage at "/home"
@@ -110,9 +105,44 @@ function App() {
             exact
             path="/inventory"
           >
-            <AboutPage />
+            <InventoryPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to "/user"
+            // - else shows LandingPage at "/home"
+            // shows InventoryPage
+
+            exact
+            path="/item"
+          >
+            <ItemPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to "/user"
+            // - else shows LandingPage at "/home"
+            // shows InventoryPage
+
+            exact
+            path="/admin"
+          >
+            <AdminPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to "/user"
+            // - else shows LandingPage at "/home"
+            // shows InventoryPage
+
+            exact
+            path="/info"
+          >
+            <InfoPage />
+          </ProtectedRoute>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>

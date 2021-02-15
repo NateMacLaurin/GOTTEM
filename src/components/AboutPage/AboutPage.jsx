@@ -9,8 +9,8 @@ function AboutPage() {
   return (
     <div className="container">
       <div>
-        <p>This about page is for anyone to read!</p>
-        <p>This page will contain information about the App and how to use it.</p>
+        <h2>Welcome to the General Organizational Tech Tracker and Event Monitor (GOTTEM)</h2>
+        <p>GOTTEM gives you accurate data in a scaleable, simple infrastructure that saves time, money, and sanity.</p>
       </div>
     </div>
   );
