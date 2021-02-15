@@ -25,6 +25,27 @@ router.get('/', (req, res) => {
     });
 });
 
+//get one with genres
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  const query = `SELECT "assets_master".id,"domain_name","ipv4","mac_addr", "isRetired", 
+  "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
+  JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+  JOIN "locations" ON "locations".id = "assets_master".location_id
+  JOIN "asset_status" ON "asset_status".id = "assets_master".status_id
+  WHERE "assets_master".id = $1;`;
+
+  pool.query(query, [id])
+    .then( result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR: Get movie by ID', err);
+      res.sendStatus(500)
+    })
+
+});
+
 /**
  * POST route template
  */

@@ -115,6 +115,18 @@ function App() {
             // shows InventoryPage
 
             exact
+            path="/item/"
+          >
+            <ItemPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to "/user"
+            // - else shows LandingPage at "/home"
+            // shows InventoryPage
+
+            exact
             path="/item/:id"
           >
             <ItemPage />
