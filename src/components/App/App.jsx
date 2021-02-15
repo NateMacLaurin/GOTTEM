@@ -115,7 +115,7 @@ function App() {
             // shows InventoryPage
 
             exact
-            path="/item"
+            path="/item/:id"
           >
             <ItemPage />
           </ProtectedRoute>

@@ -1,9 +1,9 @@
-const masterAssetsReducer = (state = {}, action) => {
+const masterAssetsReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_MASTER_ASSETS':
         return action.payload;
       case 'UNSET_MASTER_ASSETS':
-        return {};
+        return [];
       default:
         return state;
     }
