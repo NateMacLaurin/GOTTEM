@@ -8,7 +8,9 @@ const router = express.Router();
 router.get('/', (req, res) => {
   // GET route code here
   // debug server console log
-  console.log(`In /api/type/ GET`);
+  console.log(`In /api/type/ GET master`);
+  const query = `SELECT * from "assets_master" ORDER BY "local_name" ASC
+  `;
 
 });
 
