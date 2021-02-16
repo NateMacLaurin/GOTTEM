@@ -53,7 +53,8 @@ function* deleteSingleAsset(action){
             //debug log server response to client
         console.log(`Client Response: ${deleteClientResponse.response}`);
             //get all assets after successful delete
-        yield put({type: 'FETCH_MASTER_ASSETS'});       
+        yield put({type: 'FETCH_MASTER_ASSETS'});
+        yield put({type: 'UNSET_MASTER_ASSET_ITEM'});       
     }catch(err){
         console.log(`Error deleting single asset: ${err}`);
     }
