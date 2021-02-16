@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useParams } from "react-router-dom";
-import {Card, ListGroup} from 'react-bootstrap';
 import SearchForm from '../SearchForm/SearchForm';
 import ItemDetails from '../ItemDetails/ItemDetails';
 
