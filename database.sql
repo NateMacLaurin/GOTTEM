@@ -145,3 +145,9 @@ SELECT * FROM "search_base";
 SELECT * FROM "asset_status";
 SELECT * FROM "locations";
 SELECT * FROM "asset_types";
+
+SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", "added_by", 
+  "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
+  JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+  JOIN "locations" ON "locations".id = "assets_master".location_id
+  JOIN "asset_status" ON "asset_status".id = "assets_master".status_id;

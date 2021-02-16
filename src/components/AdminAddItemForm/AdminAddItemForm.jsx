@@ -6,34 +6,31 @@ function AdminAddItemForm() {
     //local state variables
   const [heading, setHeading] = useState('AdminAddItemForm Component');
 
-  const [newAsset, setNewAsset] = useState({});
   const [assetName, setAssetName] = useState('NAME_HERE');
   const [assetNumber, setAssetNumber] = useState(12345678);
   const [assetIP, setAssetIP] = useState('123.456.789.123');
   const [assetMAC, setAssetMAC] = useState('12-34-56-78-90-AB');
-  const [assetType, setAssetType] = useState('');
-  const [assetLocation, setAssetLocation] = useState('');
-  const [assetStatus, setAssetStatus] = useState('');
+  const [assetType, setAssetType] = useState(0);
+  const [assetLocation, setAssetLocation] = useState(0);
+  const [assetStatus, setAssetStatus] = useState(0);
 
     //hooks
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
-    
+
     e.preventDefault();
 
-    setNewAsset({
-      assetNumber: assetNumber,
-      domain_name: assetName,
-      ipv4: assetIP,
-      mac_addr: assetMAC,
-      type_id: assetType,
-      location_id: assetLocation,
-      status_id: assetStatus
-    })
-    console.log(`Dispatching: ${newAsset}`);
-
-    dispatch({type: 'POST_NEW_ASSET', payload: newAsset});
+    dispatch({type: 'POST_NEW_ASSET', payload: {
+        assetNumber: assetNumber,
+        domain_name: assetName,
+        ipv4: assetIP,
+        mac_addr: assetMAC,
+        type_id: assetType,
+        location_id: assetLocation,
+        status_id: assetStatus
+      }
+    });
   }
 
   return (

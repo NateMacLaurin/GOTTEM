@@ -36,7 +36,7 @@ function* postNewAsset(action){
             //POST the action.payload to server
         const addClientResponse = yield axios.post(`/api/master/add`, action.payload);
             //debug log server response to client
-        console.log(`Client Response: ${addClientResponse}`);
+        console.log(`Client Response: ${addClientResponse.response}`);
             //get all assets after successful post
         yield put({type: 'FETCH_MASTER_ASSETS'});
     }catch(err){
@@ -45,9 +45,9 @@ function* postNewAsset(action){
 }
 
 function* assetMasterSaga() {
+    yield takeLatest('POST_NEW_ASSET', postNewAsset);
     yield takeLatest('FETCH_MASTER_ASSETS', getAllAssets);
     yield takeLatest('FETCH_MASTER_ASSET', getSingleAsset);
-    yield takeLatest('POST_NEW_ASSET', postNewAsset);
 }
 
 export default assetMasterSaga;
