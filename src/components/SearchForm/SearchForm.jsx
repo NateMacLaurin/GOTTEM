@@ -14,13 +14,8 @@ function SearchForm(props) {
         //clickhandler
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: searchString, searchCategory})
+        //dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: searchString, searchCategory})
     };
-
-        //on render effect
-    useEffect(() => {
-        dispatch({type: 'GET_SEARCH_FIELDS', payload: props.searchLoc});
-    }, []);
 
     return (
         <div>
@@ -31,9 +26,9 @@ function SearchForm(props) {
                     value={searchString}
                     onChange={(event) => setSearchString(event.target.value)}
                 />
-                <select value={this.state.value} onChange={this.handleChange}>
+                {/*<select value={this.state.value} onChange={this.handleChange}>
                     <option value="domain_name">Device Name</option>
-                </select>
+                </select>*/}
                 <button type="submit">Submit</button>
             </form>
         </div>

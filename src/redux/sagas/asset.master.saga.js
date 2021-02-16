@@ -19,7 +19,7 @@ function* getSingleAsset(action){
     //debug log
     console.log(`In getSingleAsset Saga at:`, action.payload);
     try{
-        const masterAssetItem = yield axios.get(`/api/master/${action.payload}`);
+        const masterAssetItem = yield axios.get(`/api/master/item/${action.payload}`);
             //debug console log reponse data
         console.log('get one asset:', masterAssetItem.data);
             //pass to reducer

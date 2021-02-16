@@ -9,16 +9,18 @@ function InventoryPage(props) {
   const [heading, setHeading] = useState('Inventory Component');
     //hooks
   const masterAssetStore = useSelector((store) => store.masterAssets);
+  const baseSearchFields = useSelector((store) => store.baseSearchFields);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_MASTER_ASSETS' });
+    dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
 }, []);
 
   return (
     <div>
       <h2>{heading}</h2>
-      <SearchForm searchLoc={'inventory'}/>
+      <SearchForm baseSearchFields={baseSearchFields}/>
       <InventoryDisplay masterAssetStore={masterAssetStore}/>
       <InventoryChart masterAssetStore={masterAssetStore}/>
     </div>

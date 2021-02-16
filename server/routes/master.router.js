@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 });
 
 //get one with genres
-router.get('/:id', (req, res) => {
+router.get('/item/:id', (req, res) => {
   const id = req.params.id;
   const query = `SELECT "assets_master".id,"domain_name","ipv4","mac_addr", "isRetired", 
   "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
@@ -44,6 +44,22 @@ router.get('/:id', (req, res) => {
       res.sendStatus(500)
     })
 
+});
+
+router.get('/search/', (req, res) => {
+  // GET route code here
+  // debug server console log
+  console.log(`In /api/master/search GET`);
+  const query = `SELECT * FROM "search_base";`;
+
+  pool.query(query)
+    .then( result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('ERROR: Get base search categories', err);
+      res.sendStatus(500)
+    });
 });
 
 /**

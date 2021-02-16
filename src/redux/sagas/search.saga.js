@@ -1,22 +1,22 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* getSearchFields() {
+function* getSearchFieldsBase() {
     //debug log
-    console.log(`In getSearchFields Saga`);
+    console.log(`In getSearchFieldsBase Saga`);
     try{
-        const searchFields = yield axios.get('/api/master/search');
+        const searchFields = yield axios.get('/api/master/search/');
             //debug console log reponse data
-        console.log('get search fields:', searchFields.data);
+        console.log('get base search fields:', searchFields.data);
             //pass to reducer
-        yield put({type: 'SET_SEARCH_FIELDS', payload: searchFields.data});
+        yield put({type: 'SET_SEARCH_FIELDS_BASE', payload: searchFields.data});
     }catch(err){
-        console.log('Error fetching search fields:', error);
+        console.log('Error fetching base search fields:', error);
     }
 }
 
 function* searchSaga() {
-    yield takeLatest('GET_SEARCH_FIELDS', getSearchFields);
+    yield takeLatest('GET_SEARCH_FIELDS_BASE', getSearchFieldsBase);
 }
 
 export default searchSaga;
