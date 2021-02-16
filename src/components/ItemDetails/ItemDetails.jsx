@@ -21,15 +21,11 @@ function ItemDetails(props) {
 
         //hooks
     const dispatch = useDispatch();
-    const history = useHistory();
-
-
 
     const handleEdit = () => {
         console.log(`Clicked Edit`);
         //flip our editing flag
         setIsEditing(true);
-
     }
 
     const handleDelete = () => {
@@ -55,7 +51,7 @@ function ItemDetails(props) {
         setAssetIP(props.targetAsset[0]?.ipv4);
         setAssetMAC(props.targetAsset[0]?.mac_addr);
         setAssetStatus(props.targetAsset[0]?.status_name);
-    }, [dispatch])
+    }, [])
 
     return (
         <>

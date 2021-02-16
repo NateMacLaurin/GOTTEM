@@ -100,7 +100,7 @@ router.get('/search/base', rejectUnauthenticated, (req, res) => {
 router.post('/add', rejectUnauthenticated, (req, res) => {
   // POST route code here
   // debug server console log with post data
-  console.log(`In /api/master/add POST ${req.body}`);
+  console.log(`In /api/master/add POST Number: ${req.body.assetNumber}`);
 
   const queryText = `INSERT INTO "assets_master" 
   ("assetNumber", "domain_name", "ipv4", "mac_addr",

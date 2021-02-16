@@ -7,6 +7,7 @@
 --DROP TABLE "user";
 
 SELECT * FROM "user";
+SELECT * FROM "assets_master";
 
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
@@ -40,12 +41,20 @@ VALUES (1, 1, 1, 12345678, 'EXAMPLE_PC', '10.10.110.100', '01-23-45-67-89-0A'),
  (3, 3, 2, 12345680, 'LAP_PC', '10.10.110.102', '0A-33-AB-67-89-F3'),
  (3, 2, 3, 12345681, 'SLOW_PC', '10.10.110.103', '31-00-AF-93-00-0B'),
  (4, 4, 1, 12345682, 'PHONE', '10.10.110.104', '86-CC-65-27-20-FD'),
- (1, 1, 5, 12345683, 'DEAD_PC', '10.10.110.105', '32-77-CD-37-0C-4B');
+  (3, 2, 3, 12345683, 'FAST_LAP_PC', '10.10.110.105', 'CA-8A-B4-34-1D-A5'),
+ (4, 1, 2, 12345684, 'PHONE', '10.10.110.106', '1F-B7-32-27-20-3B'),
+ (1, 1, 5, 12345685, 'DEAD_PC', '10.10.110.107', '32-77-CD-37-0C-4B');
 
 --add column test
 
 ALTER TABLE "assets_master"
 ADD "added_by" VARCHAR(30) DEFAULT 'Unknown';
+
+--delete test
+DELETE FROM "assets_master" WHERE id = 18;
+DELETE FROM "assets_master" WHERE id = 19;
+--update test
+UPDATE "assets_master" SET "domain_name" = 'IPHONE' WHERE id = 3;
 
 --DROP TABLE "asset_types";
 
@@ -133,21 +142,23 @@ JOIN "locations" ON "locations".id = "assets_master".location_id
 JOIN "asset_status" ON "asset_status".id = "assets_master".status_id
 WHERE "assets_master".id = 1;
 
---search form field
-SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
-"asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
-JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
-JOIN "locations" ON "locations".id = "assets_master".location_id
-JOIN "asset_status" ON "asset_status".id = "assets_master".status_id
-WHERE domain_name ILIKE '%PC%';
 
 SELECT * FROM "search_base";
 SELECT * FROM "asset_status";
 SELECT * FROM "locations";
 SELECT * FROM "asset_types";
 
+--full query
 SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", "added_by", 
   "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
   JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
   JOIN "locations" ON "locations".id = "assets_master".location_id
   JOIN "asset_status" ON "asset_status".id = "assets_master".status_id;
+  
+--search form field testing
+SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
+"asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
+JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+JOIN "locations" ON "locations".id = "assets_master".location_id
+JOIN "asset_status" ON "asset_status".id = "assets_master".status_id
+WHERE domain_name ILIKE '%PC%';
