@@ -5,14 +5,18 @@ function SearchForm(props) {
         //state
     const [heading, setHeading] = useState('SearchForm Component');
     const [searchString, setSearchString] = useState('');
+    const [searchCategory, setSearchCategory] = useState('');
+
         //hooks
     const store = useSelector((store) => store);
     const dispatch = useDispatch();
+
         //clickhandler
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch({type:'POST_SEARCH_QUERY', payload:{searchString}})
+        dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: searchString, searchCategory})
     };
+    
         //on render effect
     useEffect(() => {
         dispatch({type: 'GET_SEARCH_FIELDS', payload: props.searchLoc});

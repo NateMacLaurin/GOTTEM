@@ -9,6 +9,7 @@ function AdminPage(props) {
   return (
     <div>
       <h2>{heading}</h2>
+      <p>This page will list helpful information to a first-time user on how to use the app.</p>
     </div>
   );
 }
