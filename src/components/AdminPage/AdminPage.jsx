@@ -5,8 +5,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import ItemDetails from '../ItemDetails/ItemDetails';
 
 function AdminPage(props) {
-    
-  const store = useSelector((store) => store);
+ 
+  const targetAsset = useSelector((store) => store.masterAssetItem);
   const [heading, setHeading] = useState('Admin Component');
   const baseSearchFields = useSelector((store) => store.baseSearchFields);
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function AdminPage(props) {
     <div>
       <h2>{heading}</h2>
       <SearchForm baseSearchFields={baseSearchFields}/>
-      <ItemDetails />
+      <ItemDetails targetAsset={targetAsset}/>
       <AdminAddItemForm />
     </div>
   );
