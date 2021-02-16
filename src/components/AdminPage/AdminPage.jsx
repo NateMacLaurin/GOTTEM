@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
+import AdminAddItemForm from '../AdminAddItemForm/AdminAddItemForm';
+import SearchForm from '../SearchForm/SearchForm';
 
 function AdminPage(props) {
     
@@ -9,6 +11,8 @@ function AdminPage(props) {
   return (
     <div>
       <h2>{heading}</h2>
+      <SearchForm />
+      <AdminAddItemForm />
     </div>
   );
 }
