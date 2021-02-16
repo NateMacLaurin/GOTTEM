@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { useParams } from "react-router-dom";
 import {Card, ListGroup} from 'react-bootstrap';
 import SearchForm from '../SearchForm/SearchForm';
+import ItemDetails from '../ItemDetails/ItemDetails';
 
 function ItemPage(props) {
     //vars
@@ -12,6 +13,7 @@ function ItemPage(props) {
     //hooks
   const dispatch = useDispatch();
   const masterAsset = useSelector((store) => store.masterAssetItem);
+  const baseSearchFields = useSelector((store) => store.baseSearchFields);
     //debug log
   console.log(`ID param of redirect: ${id}`);
     //states
@@ -19,13 +21,15 @@ function ItemPage(props) {
   const [asset, setAsset] = useState([]);
 
   useEffect(() => {
-    dispatch({type: 'FETCH_MASTER_ITEM', payload: id});
+    dispatch({type: 'FETCH_MASTER_ASSET', payload: id});
+    dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
   }, [])
 
   return (
     <div>
       <h2>{heading}</h2>
-      <SearchForm />
+      <SearchForm baseSearchFields={baseSearchFields}/>
+      <ItemDetails />
       <Card key={masterAsset[0]?.id} stype={{width: '14rem'}}>
         <Card.Body>
               <Card.Title>{masterAsset[0]?.domain_name} - {masterAsset[0]?.type_name}</Card.Title>

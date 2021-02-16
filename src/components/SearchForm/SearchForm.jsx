@@ -15,19 +15,14 @@ function SearchForm(props) {
         //clickhandler
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(`handleSubmit Search - String: ${searchString} Category: ${searchCategory}`);
-        //dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: searchString, searchCategory});
+        console.log(`handleSubmit Search - Category: ${searchCategory} String: ${searchString}`);
+        dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: {searchCategory, searchString}});
+        setSearchString('');
     };
 
-        //changeHandler
-    const handleChange = () => {
-
-    }
-
     useEffect(() => {
-        dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
-        setSearchBase(store.baseSearchFields);
-    }, []);
+        setSearchBase(props.baseSearchFields);
+    });
 
     return (
         <div>
@@ -40,7 +35,7 @@ function SearchForm(props) {
                     onChange={(event) => setSearchString(event.target.value)}
                 />
                 <select value={searchCategory} onChange={(event) => setSearchCategory(event.target.value)}>
-                    {searchBase.map((category) => {
+                    {props.baseSearchFields.map((category) => {
                         return(
                             <option key={category.id} value={category.base_category}>{category.base_category}</option>
                         )

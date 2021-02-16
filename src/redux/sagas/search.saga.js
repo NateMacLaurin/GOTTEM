@@ -5,7 +5,7 @@ function* getSearchFieldsBase() {
     //debug log
     console.log(`In getSearchFieldsBase Saga`);
     try{
-        const searchFields = yield axios.get('/api/master/search/');
+        const searchFields = yield axios.get('/api/master/search/base');
             //debug console log reponse data
         console.log('get base search fields:', searchFields.data);
             //pass to reducer

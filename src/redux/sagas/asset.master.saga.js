@@ -29,9 +29,25 @@ function* getSingleAsset(action){
     }
 }
 
+function* postNewAsset(action){
+    //debug log
+    console.log(`In postNewAsset Saga at:`, action.payload);
+    try{
+            //POST the action.payload to server
+        const addClientResponse = yield axios.post(`/api/master/add`, action.payload);
+            //debug log server response to client
+        console.log(`Client Response: ${addClientResponse}`);
+            //get all assets after successful post
+        yield put({type: 'FETCH_MASTER_ASSETS'});
+    }catch(err){
+        console.log(`Error posting single asset: ${err}`);
+    }
+}
+
 function* assetMasterSaga() {
     yield takeLatest('FETCH_MASTER_ASSETS', getAllAssets);
-    yield takeLatest('FETCH_MASTER_ITEM', getSingleAsset);
+    yield takeLatest('FETCH_MASTER_ASSET', getSingleAsset);
+    yield takeLatest('POST_NEW_ASSET', postNewAsset);
 }
 
 export default assetMasterSaga;
