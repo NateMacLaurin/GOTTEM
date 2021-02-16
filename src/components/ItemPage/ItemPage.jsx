@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useParams } from "react-router-dom";
 import {Card, ListGroup} from 'react-bootstrap';
+import SearchForm from '../SearchForm/SearchForm';
 
 function ItemPage(props) {
     //vars
@@ -24,6 +25,7 @@ function ItemPage(props) {
   return (
     <div>
       <h2>{heading}</h2>
+      <SearchForm />
       <Card key={masterAsset[0]?.id} stype={{width: '14rem'}}>
         <Card.Body>
               <Card.Title>{masterAsset[0]?.domain_name} - {masterAsset[0]?.type_name}</Card.Title>
@@ -38,6 +40,7 @@ function ItemPage(props) {
               {/*this will be a button to delete this item*/}
           </Card.Body>
       </Card>
+      {/*this will be a return button to return to inventory page*/}
     </div>
   );
 }

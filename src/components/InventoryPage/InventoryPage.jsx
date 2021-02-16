@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import InventoryDisplay from '../InventoryDisplay/InventoryDisplay';
+import InventoryDisplay from '../InventoryTable/InventoryTable';
 import InventoryChart from '../InventoryChart/InventoryChart';
+import SearchForm from '../SearchForm/SearchForm';
 
 function InventoryPage(props) {
     //state vars
@@ -17,6 +18,7 @@ function InventoryPage(props) {
   return (
     <div>
       <h2>{heading}</h2>
+      <SearchForm searchLoc={'inventory'}/>
       <InventoryDisplay masterAssetStore={masterAssetStore}/>
       <InventoryChart masterAssetStore={masterAssetStore}/>
     </div>

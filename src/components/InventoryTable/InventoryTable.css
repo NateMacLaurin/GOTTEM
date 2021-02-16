@@ -1,0 +1,13 @@
+.masterTable {
+    display : flex;
+
+    
+}
+.tableCard {
+    flex-wrap: wrap-reverse;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 1;
+    text-align: center;
+    border: 1px solid black;
+}

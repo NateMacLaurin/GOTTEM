@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { Card, ListGroup } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import '../../bootstrap.min.css';
+import '../InventoryTable/InventoryTable.css';
 
-function InventoryDisplayItem({asset}) {
-    
-    const store = useSelector((store) => store);
+function InventoryTableItem({asset}) {
+        //state
     const [heading, setHeading] = useState('Inventory Display Item');
 
+        //hooks
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    function handleSelectItem(id) {
+        console.log(`Item Clicked:${id}`);
+            //take us to the item clicked
+        history.push(`/item/${id}`);
+        dispatch({type: 'FETCH_MASTER_ITEM', payload: id});
+    }
 
     return (
-        <Card.Body>
+        <Card.Body 
+            onClick={() => {handleSelectItem(asset.id)}}
+        >
             <Card.Title>{asset?.domain_name} - {asset?.type_name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{asset?.loc_name}</Card.Subtitle>
             <ListGroup variant="info">
@@ -19,10 +32,8 @@ function InventoryDisplayItem({asset}) {
                 <ListGroup.Item>{asset?.status_name}</ListGroup.Item>
                 <ListGroup.Item>{asset?.isRetired}</ListGroup.Item>
             </ListGroup>
-            {/*this will be a button to edit this item*/}
-            {/*this will be a button to delete this item*/}
         </Card.Body>
     );
 }
 
-export default InventoryDisplayItem;
+export default InventoryTableItem;
