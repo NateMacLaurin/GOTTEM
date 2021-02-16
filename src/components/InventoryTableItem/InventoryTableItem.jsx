@@ -30,7 +30,6 @@ function InventoryTableItem({asset}) {
                 <ListGroup.Item>{asset?.ipv4}</ListGroup.Item>
                 <ListGroup.Item>{asset?.mac_addr}</ListGroup.Item>
                 <ListGroup.Item>{asset?.status_name}</ListGroup.Item>
-                <ListGroup.Item>{asset?.isRetired}</ListGroup.Item>
             </ListGroup>
         </Card.Body>
     );
