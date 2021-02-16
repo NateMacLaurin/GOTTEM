@@ -16,7 +16,7 @@ function SearchForm(props) {
         event.preventDefault();
         dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: searchString, searchCategory})
     };
-    
+
         //on render effect
     useEffect(() => {
         dispatch({type: 'GET_SEARCH_FIELDS', payload: props.searchLoc});
@@ -31,9 +31,9 @@ function SearchForm(props) {
                     value={searchString}
                     onChange={(event) => setSearchString(event.target.value)}
                 />
-                {/*<select value={this.state.value} onChange={this.handleChange}>
-                    <option value=""></option>
-                </select>*/}
+                <select value={this.state.value} onChange={this.handleChange}>
+                    <option value="domain_name">Device Name</option>
+                </select>
                 <button type="submit">Submit</button>
             </form>
         </div>
