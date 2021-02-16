@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Card, ListGroup } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import '../../bootstrap.min.css';
@@ -7,7 +7,6 @@ import '../InventoryTable/InventoryTable.css';
 
 function InventoryTableItem({asset}) {
         //state
-    const [heading, setHeading] = useState('Inventory Display Item');
 
         //hooks
     const history = useHistory();
@@ -15,9 +14,9 @@ function InventoryTableItem({asset}) {
 
     function handleSelectItem(id) {
         console.log(`Item Clicked:${id}`);
+        dispatch({type: 'FETCH_MASTER_ASSET', payload: id});
             //take us to the item clicked
         history.push(`/item/${id}`);
-        dispatch({type: 'FETCH_MASTER_ITEM', payload: id});
     }
 
     return (

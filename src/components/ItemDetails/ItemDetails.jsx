@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Card, ListGroup, Button} from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Card, ListGroup, Button } from 'react-bootstrap';
 
 function ItemDetails(props) {
 
@@ -35,12 +34,12 @@ function ItemDetails(props) {
 
     const handleSave = () => {
         console.log(`Clicked Save`);
-        setIsEditing(false);
         dispatch({type: 'EDIT_ASSET', payload: {
             id: assetID, 
             domain_name: assetName
           }
         });
+        setIsEditing(false);
     }
 
     useEffect(() => {

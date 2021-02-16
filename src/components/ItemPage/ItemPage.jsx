@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 import SearchForm from '../SearchForm/SearchForm';
 import ItemDetails from '../ItemDetails/ItemDetails';
@@ -20,9 +20,9 @@ function ItemPage(props) {
   const [asset, setAsset] = useState([]);
 
   useEffect(() => {
-    dispatch({type: 'FETCH_MASTER_ASSET', payload: id});
+    //dispatch({type: 'FETCH_MASTER_ASSET', payload: id});
     dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
-  }, [])
+  }, [dispatch])
 
   return (
     <div>

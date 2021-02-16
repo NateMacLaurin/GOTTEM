@@ -104,10 +104,10 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
 
   const queryText = `INSERT INTO "assets_master" 
   ("assetNumber", "domain_name", "ipv4", "mac_addr",
-  "type_id", "location_id", "status_id", "added_by")
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+  "type_id", "location_id", "status_id")
+  VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
-  pool.query(queryText, [req.body.assetNumber, req.body.domain_name, req.body.ipv4, req.body.mac_addr, req.body.type_id, req.body.location_id, req.body.status_id, req.user.username])
+  pool.query(queryText, [req.body.assetNumber, req.body.domain_name, req.body.ipv4, req.body.mac_addr, req.body.type_id, req.body.location_id, req.body.status_id])
   .then((result) => {
     res.sendStatus(200);
   })

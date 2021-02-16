@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import InventoryTableItem from '../InventoryTableItem/InventoryTableItem';
-import AddItemForm from '../AdminAddItemForm/AdminAddItemForm';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 import './InventoryTable.css';
 import '../../bootstrap.min.css';
