@@ -28,9 +28,10 @@ function ItemPage(props) {
   return (
     <div>
       <h2>{heading}</h2>
+      {targetAsset.length != 0 ? 
+        <ItemDetails targetAsset={targetAsset}/>:<h1>Search for an Item to Populate</h1>
+      }
       <SearchForm baseSearchFields={baseSearchFields}/>
-      <ItemDetails targetAsset={targetAsset}/>
-
       {/*this will be a return button to return to inventory page*/}
     </div>
   );
