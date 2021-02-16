@@ -88,7 +88,7 @@ function AdminAddItemForm() {
             <option value={4}>Ordered</option>
             <option value={5}>Retired</option>
         </select>
-        <button type="submit">Add Asset</button>
+        <button type="submit">Add/Edit Asset</button>
         </form>
     </div>
   );
