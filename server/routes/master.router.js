@@ -20,7 +20,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch(err => {
-      console.log('ERROR: Get all assets', err);
+      console.log('ERROR: GET all assets', err);
       res.sendStatus(500)
     });
 });
@@ -43,7 +43,7 @@ router.get('/item/:id', rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch(err => {
-      console.log('ERROR: Get asset by ID', err);
+      console.log('ERROR: GET asset by ID', err);
       res.sendStatus(500)
     })
 
@@ -73,7 +73,7 @@ router.get('/search/query/:category/:text', rejectUnauthenticated, (req, res) =>
     })
     .catch(err => {
       console.log(`Full Query Text: ${query}`);
-      console.log('ERROR: Get base search categories', err);
+      console.log('ERROR: GET searched asset', err);
       res.sendStatus(500)
     });
 });
@@ -91,7 +91,7 @@ router.get('/search/base', rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch(err => {
-      console.log('ERROR: Get base search categories', err);
+      console.log('ERROR: GET base search categories.', err);
       res.sendStatus(500)
     });
 });
@@ -115,6 +115,25 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
     console.log('ERROR: POSTing new asset:', err);
     res.sendStatus(500)
   });
+});
+
+//delete selected asset
+
+router.delete('/delete/:id', rejectUnauthenticated, (req, res) => {
+  // debug server console log
+console.log(`In /api/master/${req.params.id} DELETE selected asset`);
+const id = req.params.id;
+const query = `DELETE FROM "assets_master" WHERE id = $1;`;
+
+pool.query(query, [id])
+  .then( result => {
+    res.send(result.rows);
+  })
+  .catch(err => {
+    console.log('ERROR: DELETE asset by ID', err);
+    res.sendStatus(500)
+  })
+
 });
 
 module.exports = router;

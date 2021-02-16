@@ -44,10 +44,26 @@ function* postNewAsset(action){
     }
 }
 
+function* deleteSingleAsset(action){
+    //debug log
+    console.log(`In deleteSingleAsset Saga at:`, action.payload);
+    try{
+            //POST the action.payload to server
+        const deleteClientResponse = yield axios.delete(`/api/master/delete/${action.payload}`);
+            //debug log server response to client
+        console.log(`Client Response: ${deleteClientResponse.response}`);
+            //get all assets after successful delete
+        yield put({type: 'FETCH_MASTER_ASSETS'});       
+    }catch(err){
+        console.log(`Error deleting single asset: ${err}`);
+    }
+}
+
 function* assetMasterSaga() {
     yield takeLatest('POST_NEW_ASSET', postNewAsset);
     yield takeLatest('FETCH_MASTER_ASSETS', getAllAssets);
     yield takeLatest('FETCH_MASTER_ASSET', getSingleAsset);
+    yield takeLatest('DELETE_ASSET', deleteSingleAsset);
 }
 
 export default assetMasterSaga;
