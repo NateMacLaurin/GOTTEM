@@ -136,4 +136,24 @@ pool.query(query, [id])
 
 });
 
+//edit selected asset
+
+router.put('/edit/', rejectUnauthenticated, (req, res) => {
+  // debug server console log
+console.log(`In /api/master/edit/ with ID: ${req.body.id} NAME: ${req.body.domain_name} PUT selected asset`);
+const id = req.body.id;
+const name = req.body.domain_name;
+const query = `UPDATE "assets_master" SET "domain_name" = '$1' WHERE id = $2;`;
+
+pool.query(query, [name, id])
+  .then( result => {
+    res.send(result.rows);
+  })
+  .catch(err => {
+    console.log('ERROR: PUT asset by ID', err);
+    res.sendStatus(500)
+  })
+
+});
+
 module.exports = router;

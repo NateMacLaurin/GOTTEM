@@ -40,7 +40,7 @@ function ItemDetails(props) {
     const handleSave = () => {
         console.log(`Clicked Save`);
         setIsEditing(false);
-        dispatch({type: 'SAVE_ASSET', payload: {
+        dispatch({type: 'EDIT_ASSET', payload: {
             id: assetID, 
             domain_name: assetName
           }
@@ -48,14 +48,14 @@ function ItemDetails(props) {
     }
 
     useEffect(() => {
-        setAssetID(props.targetAsset[0].id);
+        setAssetID(props.targetAsset[0]?.id);
         setAssetName(props.targetAsset[0]?.domain_name);  
         setAssetType(props.targetAsset[0]?.type_name);
         setAssetLocation(props.targetAsset[0]?.loc_name);
         setAssetIP(props.targetAsset[0]?.ipv4);
         setAssetMAC(props.targetAsset[0]?.mac_addr);
         setAssetStatus(props.targetAsset[0]?.status_name);
-    })
+    }, [dispatch])
 
     return (
         <>
