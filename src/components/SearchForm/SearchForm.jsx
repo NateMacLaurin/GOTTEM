@@ -5,17 +5,29 @@ function SearchForm(props) {
         //state
     const [heading, setHeading] = useState('SearchForm Component');
     const [searchString, setSearchString] = useState('');
-    const [searchCategory, setSearchCategory] = useState('');
+        //default the state to domain_name for consistency and no null search
+    const [searchCategory, setSearchCategory] = useState('domain_name');
+    const [searchBase, setSearchBase] = useState([]);
 
         //hooks
     const store = useSelector((store) => store);
     const dispatch = useDispatch();
-
         //clickhandler
     const handleSubmit = (event) => {
         event.preventDefault();
-        //dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: searchString, searchCategory})
+        console.log(`handleSubmit Search - String: ${searchString} Category: ${searchCategory}`);
+        //dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: searchString, searchCategory});
     };
+
+        //changeHandler
+    const handleChange = () => {
+
+    }
+
+    useEffect(() => {
+        dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
+        setSearchBase(store.baseSearchFields);
+    }, []);
 
     return (
         <div>
@@ -24,12 +36,17 @@ function SearchForm(props) {
                 <span>Search:</span>
                 <input
                     value={searchString}
+                    default='Search'
                     onChange={(event) => setSearchString(event.target.value)}
                 />
-                {/*<select value={this.state.value} onChange={this.handleChange}>
-                    <option value="domain_name">Device Name</option>
-                </select>*/}
-                <button type="submit">Submit</button>
+                <select value={searchCategory} onChange={(event) => setSearchCategory(event.target.value)}>
+                    {searchBase.map((category) => {
+                        return(
+                            <option key={category.id} value={category.base_category}>{category.base_category}</option>
+                        )
+                    })}
+                </select>
+                <button type="submit">Search</button>
             </form>
         </div>
     );

@@ -14,7 +14,6 @@ function InventoryPage(props) {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_MASTER_ASSETS' });
-    dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
 }, []);
 
   return (
