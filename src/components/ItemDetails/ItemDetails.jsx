@@ -37,8 +37,8 @@ function ItemDetails(props) {
         console.log(`Clicked Save`);
         dispatch({type: 'EDIT_ASSET', payload: {
             id: assetID, 
-            domain_name: assetName,
             assetNumber: assetNumber,
+            domain_name: assetName,
             ipv4: assetIP, 
             mac_addr: assetMAC
           }
@@ -48,12 +48,12 @@ function ItemDetails(props) {
 
     useEffect(() => {
         setAssetID(props.targetAsset[0]?.id);
-        setAssetName(props.targetAsset[0]?.domain_name);
         setAssetNumber(props.targetAsset[0]?.assetNumber);
-        setAssetType(props.targetAsset[0]?.type_name);
-        setAssetLocation(props.targetAsset[0]?.loc_name);
+        setAssetName(props.targetAsset[0]?.domain_name);
         setAssetIP(props.targetAsset[0]?.ipv4);
         setAssetMAC(props.targetAsset[0]?.mac_addr);
+        setAssetType(props.targetAsset[0]?.type_name);
+        setAssetLocation(props.targetAsset[0]?.loc_name);
         setAssetStatus(props.targetAsset[0]?.status_name);
     }, [])
 
@@ -80,18 +80,22 @@ function ItemDetails(props) {
                     />
                 </Card.Subtitle>
                 <Card.Subtitle>
-                    <input
-                        className="localTypeField"
-                        value={assetType}
-                        onChange={(event) => setAssetType(event.target.value)}
-                    />
+                    <label htmlFor="typeSelect">Type:</label>
+                    <select className="typeSelect" value={assetType} onChange={(event) => setAssetType(event.target.value)}>
+                        <option value='1'>Desktop PC</option>
+                        <option value='2'>Laptop Macintosh</option>
+                        <option value='3'>Laptop PC</option>
+                        <option value='4'>Phone</option>
+                    </select>
                 </Card.Subtitle>
                 <Card.Subtitle className="mb-2 text-muted">
-                    <input
-                        className="localLocationField"
-                        value={assetLocation}
-                        onChange={(event) => setAssetLocation(event.target.value)}
-                    />
+                    <label htmlFor="locationSelect">Location:</label>
+                    <select className="locationSelect" value={assetLocation} onChange={(event) => setAssetLocation(event.target.value)}>
+                        <option text='1'>Main Office 100 Big Chungus Dr</option>
+                        <option value='2'>Sattelite Office 110 Enterprise Pkwy</option>
+                        <option value='2'>New Branch 123 Main Street</option>
+                        <option value='4'>Work From Home</option>
+                    </select>
                 </Card.Subtitle>
                 <ListGroup variant="info">
                     <ListGroup.Item>
@@ -109,11 +113,14 @@ function ItemDetails(props) {
                         />
                     </ListGroup.Item>
                     <ListGroup.Item>
-                        <input
-                                className="localStatusField"
-                                value={assetStatus}
-                                onChange={(event) => setAssetStatus(event.target.value)}
-                        />
+                        <label htmlFor="statusSelect">Status:</label>
+                        <select className="statusSelect" value={assetStatus} onChange={(event) => setAssetStatus(event.target.value)}>
+                            <option value='1'>In Use</option>
+                            <option value='2'>In Inventory</option>
+                            <option value='3'>Awaiting Repair</option>
+                            <option value='4'>Ordered</option>
+                            <option value='5'>Retired</option>
+                        </select>        
                     </ListGroup.Item>
                 </ListGroup>
                 <Button type="submit" onClick={handleSave}>Save</Button>
