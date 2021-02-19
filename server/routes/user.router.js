@@ -31,6 +31,25 @@ router.get('/users', rejectUnauthenticatedAdmin, (req, res) => {
     });
 });
 
+router.post('/toggle', (req, res, next) => {
+  
+  const toggleID = req.body.id;
+
+  console.log(`ToggleID: ${toggleID}`);
+
+  const queryText = `UPDATE "user"
+  SET "isAdmin" =NOT "isAdmin"
+  WHERE "id" = $1;`;
+
+  pool
+    .query(queryText, [toggleID])
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log('User toggle admin failed: ', err);
+      res.sendStatus(500);
+    });
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted

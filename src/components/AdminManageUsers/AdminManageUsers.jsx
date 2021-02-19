@@ -34,7 +34,7 @@ function TemplateFunction(props) {
         <div>
         <h2>{heading}</h2>
         <TableContainer component={Paper}>
-        <Table  aria-label="simple table">
+        <Table aria-label="simple table">
             <TableHead>
             <TableRow>
                 <TableCell>User Name</TableCell>
@@ -51,8 +51,8 @@ function TemplateFunction(props) {
                         </TableCell>
                         <TableCell>{ user.id }</TableCell>
                         <TableCell>{ user.isAdmin ? 
-                            <Button addid={user.id} onClick={() => toggleAdmin(user.id)}>Remove Admin</Button> : 
-                            <Button addid={user.id} onClick={() => toggleAdmin(user.id)}>Add Admin</Button> }
+                            <Button variant="contained" color="secondary" addid={user.id} onClick={() => toggleAdmin(user.id)}>Remove Admin</Button> : 
+                            <Button variant="contained" color="primary" addid={user.id} onClick={() => toggleAdmin(user.id)}>Add Admin</Button> }
                         </TableCell>
                     </TableRow> 
                 : 

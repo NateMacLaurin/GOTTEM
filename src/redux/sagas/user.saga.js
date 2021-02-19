@@ -28,11 +28,11 @@ function* fetchUserToggle(action) {
   console.log(`In fetchUserToggle: ${action.payload}`);
     try {
       //get all users from server
-    const response = yield axios.get('/api/user/users');
+    const response = yield axios.post('/api/user/toggle', {id: action.payload});
       //log the response
-    console.log(`Response from users GET: ${response.data}`);
-      //send all users to reducer
-    yield put({ type: 'SET_USERS_LIST', payload: response.data });
+    console.log(`Response from user toggle POST: ${response.data}`);
+      //fetch updated users
+    yield put({ type: 'FETCH_ALL_USERS' });
   } catch(error){
       //log error
     console.log('Get all users GET request failed', error);
