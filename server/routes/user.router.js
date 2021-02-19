@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  rejectUnauthenticated, 
+  rejectUnauthenticated, rejectUnauthenticatedAdmin
 } = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
@@ -12,6 +12,23 @@ const router = express.Router();
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
   res.send(req.user);
+});
+
+// Handles Axios request for all users information if user is administrator
+router.get('/users', rejectUnauthenticatedAdmin, (req, res) => {
+  // Send back user object from the session (previously queried from the database)
+  
+  const queryText = `SELECT * FROM "user";`
+
+  pool.query(queryText)
+    .then(result => {
+      console.log(`Result: ${result.rows}`)
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log('GET all users for admin failed: ', err);
+      res.sendStatus(500);
+    });
 });
 
 // Handles POST request with new user data

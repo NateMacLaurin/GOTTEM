@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import AdminAddItemForm from '../AdminAddItemForm/AdminAddItemForm';
 import SearchForm from '../SearchForm/SearchForm';
 import ItemDetails from '../ItemDetails/ItemDetails';
+import AdminManageUsers from '../AdminManageUsers/AdminManageUsers';
 
 function AdminPage(props) {
  
@@ -24,6 +25,7 @@ function AdminPage(props) {
         <ItemDetails targetAsset={targetAsset}/> : <h1>Search for an Item to Populate</h1>
       }
         <AdminAddItemForm />
+        <AdminManageUsers />
       
     </div>
   );

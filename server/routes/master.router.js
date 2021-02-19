@@ -40,6 +40,7 @@ router.get('/item/:id', rejectUnauthenticated, (req, res) => {
 
   pool.query(query, [id])
     .then( result => {
+      console.log(`Result: ${result.rows}`)
       res.send(result.rows);
     })
     .catch(err => {

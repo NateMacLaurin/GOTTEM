@@ -24,8 +24,40 @@ function* fetchUser() {
   }
 }
 
+function* fetchUserToggle(action) {
+  console.log(`In fetchUserToggle: ${action.payload}`);
+    try {
+      //get all users from server
+    const response = yield axios.get('/api/user/users');
+      //log the response
+    console.log(`Response from users GET: ${response.data}`);
+      //send all users to reducer
+    yield put({ type: 'SET_USERS_LIST', payload: response.data });
+  } catch(error){
+      //log error
+    console.log('Get all users GET request failed', error);
+  }
+}
+
+function* fetchAllUsers() {
+    console.log(`In fetchAllUsers Saga`);
+  try {
+      //get all users from server
+    const response = yield axios.get('/api/user/users');
+      //log the response
+    console.log(`Response from users GET: ${response.data}`);
+      //send all users to reducer
+    yield put({ type: 'SET_USERS_LIST', payload: response.data });
+  } catch(error){
+      //log error
+    console.log('Get all users GET request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_ALL_USERS', fetchAllUsers);
+  yield takeLatest('USER_TOGGLE_ADMIN', fetchUserToggle);
 }
 
 export default userSaga;
