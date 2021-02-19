@@ -18,7 +18,6 @@ import UserPage from '../UserPage/UserPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import InfoPage from '../InfoPage/InfoPage';
 import InventoryPage from '../InventoryPage/InventoryPage';
 import ItemPage from '../ItemPage/ItemPage';
 import AdminPage from '../AdminPage/AdminPage';
@@ -97,11 +96,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows LandingPage at "/home"
-            // shows InventoryPage
-
+            // - if logged in, shows "/inventory"
             exact
             path="/inventory"
           >
@@ -109,11 +104,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows LandingPage at "/home"
-            // shows InventoryPage
-
+            // - if logged in, shows "//item/"
             exact
             path="/item/"
           >
@@ -121,11 +112,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows LandingPage at "/home"
-            // shows InventoryPage
-
+            // - if logged in, shows "//item/:id"
             exact
             path="/item/:id"
           >
@@ -134,10 +121,9 @@ function App() {
 
           <ProtectedRoute
             // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows LandingPage at "/home"
+            // - if admin in, redirects to "/admin"
+            // - else shows Inventory at "/inventory"
             // shows InventoryPage
-
             exact
             path="/admin"
             notAdminRedirect="/inventory"
@@ -145,17 +131,6 @@ function App() {
             <AdminPage />
           </ProtectedRoute>
 
-          <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows LandingPage at "/home"
-            // shows InventoryPage
-
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
