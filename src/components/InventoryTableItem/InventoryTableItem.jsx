@@ -27,6 +27,7 @@ function InventoryTableItem({asset}) {
             <Card.Title>{asset?.domain_name} - {asset?.type_name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{asset?.loc_name}</Card.Subtitle>
             <ListGroup variant="info">
+                <ListGroup.Item>{asset?.assetNumber}</ListGroup.Item>
                 <ListGroup.Item>{asset?.ipv4}</ListGroup.Item>
                 <ListGroup.Item>{asset?.mac_addr}</ListGroup.Item>
                 <ListGroup.Item>{asset?.status_name}</ListGroup.Item>

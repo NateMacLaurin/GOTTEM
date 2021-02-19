@@ -143,12 +143,20 @@ pool.query(query, [id])
 
 router.put('/edit', rejectUnauthenticated, (req, res) => {
   // debug server console log
-console.log(`In /api/master/edit/ with ID: ${req.body.id} NAME: ${req.body.domain_name} PUT selected asset`);
-const id = req.body.id;
-const name = req.body.domain_name;
-const query = `UPDATE "assets_master" SET "domain_name" = $1 WHERE id = $2;`;
+console.log(`In /api/master/edit/ with ID: ${req.body.id} 
+NAME: ${req.body.domain_name} 
+NUMBER: ${req.body.assetNumber} 
+IP: ${req.body.ipv4} 
+MAC: ${req.body.mac_addr} 
+TYPE: ${req.body.type_id} 
+LOCATION: ${req.body.location_id} 
+STATUS: ${req.body.status_id} 
+PUT selected asset`);
 
-pool.query(query, [name, id])
+const query = `UPDATE "assets_master" SET ("domain_name", "assetNumber", "ipv4", "mac_addr") = ($2, $3, $4, $5)
+WHERE id = $1;`;
+
+pool.query(query, [req.body.id, req.body.domain_name, req.body.assetNumber, req.body.ipv4, req.body.mac_addr])
   .then( result => {
     res.send(result.rows);
   })

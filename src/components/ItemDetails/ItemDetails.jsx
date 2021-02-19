@@ -11,6 +11,7 @@ function ItemDetails(props) {
         //asset editable fields
     const [assetID, setAssetID] = useState(0);
     const [assetName, setAssetName] = useState('NAME_HERE');
+    const [assetNumber, setAssetNumber] = useState(0);
     //const [assetNumber, setAssetNumber] = useState(12345678);
     const [assetIP, setAssetIP] = useState('123.456.789.123');
     const [assetMAC, setAssetMAC] = useState('12-34-56-78-90-AB');
@@ -37,11 +38,9 @@ function ItemDetails(props) {
         dispatch({type: 'EDIT_ASSET', payload: {
             id: assetID, 
             domain_name: assetName,
-            type_name: assetType, 
-            loc_name: assetLocation, 
+            assetNumber: assetNumber,
             ipv4: assetIP, 
-            mac_addr: assetMAC,
-            status_name: assetStatus
+            mac_addr: assetMAC
           }
         });
         setIsEditing(false);
@@ -49,7 +48,8 @@ function ItemDetails(props) {
 
     useEffect(() => {
         setAssetID(props.targetAsset[0]?.id);
-        setAssetName(props.targetAsset[0]?.domain_name);  
+        setAssetName(props.targetAsset[0]?.domain_name);
+        setAssetNumber(props.targetAsset[0]?.assetNumber);
         setAssetType(props.targetAsset[0]?.type_name);
         setAssetLocation(props.targetAsset[0]?.loc_name);
         setAssetIP(props.targetAsset[0]?.ipv4);
@@ -72,6 +72,13 @@ function ItemDetails(props) {
                         onChange={(event) => setAssetName(event.target.value)}
                     />
                 </Card.Title>
+                <Card.Subtitle>
+                    <input
+                        className="localNumberField"
+                        value={assetNumber}
+                        onChange={(event) => setAssetNumber(event.target.value)}
+                    />
+                </Card.Subtitle>
                 <Card.Subtitle>
                     <input
                         className="localTypeField"
@@ -114,6 +121,7 @@ function ItemDetails(props) {
             : 
             <>
                 <Card.Title>{assetName}</Card.Title>
+                <Card.Subtitle>{assetNumber}</Card.Subtitle>
                 <Card.Subtitle>{assetType}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 text-muted">{assetLocation}</Card.Subtitle>
                 <ListGroup variant="info">
