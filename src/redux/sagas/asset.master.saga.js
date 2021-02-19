@@ -71,7 +71,7 @@ function* editSingleAsset(action){
             //get all assets after successful put
         yield put({type: 'FETCH_MASTER_ASSETS'});
             //set the master item to the item that was just edited
-        yield put({type: 'SET_MASTER_ASSET_ITEM', payload: action.payload.id});       
+        yield put({type: 'FETCH_MASTER_ASSET', payload: action.payload.id});       
     }catch(err){
         console.log(`Error editing single asset: ${err}`);
     }

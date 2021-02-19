@@ -5,7 +5,7 @@ import { inventoryChartColors } from './InventoryChartColors';
 
 function InventoryChart(props) {
     
-    const store = useSelector((store) => store);
+    const store = useSelector((store) => store.masterAssets);
     const [heading, setHeading] = useState('InventoryChart Display');
     const dispatch = useDispatch();
 

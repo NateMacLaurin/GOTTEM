@@ -36,14 +36,18 @@ function ItemDetails(props) {
         console.log(`Clicked Save`);
         dispatch({type: 'EDIT_ASSET', payload: {
             id: assetID, 
-            domain_name: assetName
+            domain_name: assetName,
+            type_name: assetType, 
+            loc_name: assetLocation, 
+            ipv4: assetIP, 
+            mac_addr: assetMAC,
+            status_name: assetStatus
           }
         });
         setIsEditing(false);
     }
 
     useEffect(() => {
-        
         setAssetID(props.targetAsset[0]?.id);
         setAssetName(props.targetAsset[0]?.domain_name);  
         setAssetType(props.targetAsset[0]?.type_name);
@@ -68,12 +72,42 @@ function ItemDetails(props) {
                         onChange={(event) => setAssetName(event.target.value)}
                     />
                 </Card.Title>
-                <Card.Subtitle>{assetType}</Card.Subtitle>
-                <Card.Subtitle className="mb-2 text-muted">{assetLocation}</Card.Subtitle>
+                <Card.Subtitle>
+                    <input
+                        className="localTypeField"
+                        value={assetType}
+                        onChange={(event) => setAssetType(event.target.value)}
+                    />
+                </Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">
+                    <input
+                        className="localLocationField"
+                        value={assetLocation}
+                        onChange={(event) => setAssetLocation(event.target.value)}
+                    />
+                </Card.Subtitle>
                 <ListGroup variant="info">
-                    <ListGroup.Item>{assetIP}</ListGroup.Item>
-                    <ListGroup.Item>{assetMAC}</ListGroup.Item>
-                    <ListGroup.Item>{assetStatus}</ListGroup.Item>
+                    <ListGroup.Item>
+                        <input
+                            className="localIPField"
+                            value={assetIP}
+                            onChange={(event) => setAssetIP(event.target.value)}
+                        />
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <input
+                            className="localMACField"
+                            value={assetMAC}
+                            onChange={(event) => setAssetMAC(event.target.value)}
+                        />
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <input
+                                className="localStatusField"
+                                value={assetStatus}
+                                onChange={(event) => setAssetStatus(event.target.value)}
+                        />
+                    </ListGroup.Item>
                 </ListGroup>
                 <Button type="submit" onClick={handleSave}>Save</Button>
             </>
