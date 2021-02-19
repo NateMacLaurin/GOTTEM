@@ -9,7 +9,7 @@ function* getSearchQuery(action) {
             //debug console log reponse data
         console.log('search results:', searchResultList.data);
             //pass to reducer
-        yield put({type: 'SET_SEARCHED_ASSETS', payload: searchResultList.data});
+        yield put({type: 'SET_MASTER_ASSETS', payload: searchResultList.data});
     }catch(err){
         console.log('Error fetching search results:', error);
     }

@@ -43,6 +43,7 @@ function ItemDetails(props) {
     }
 
     useEffect(() => {
+        
         setAssetID(props.targetAsset[0]?.id);
         setAssetName(props.targetAsset[0]?.domain_name);  
         setAssetType(props.targetAsset[0]?.type_name);

@@ -20,9 +20,7 @@ function ItemPage(props) {
   const [asset, setAsset] = useState([]);
 
   useEffect(() => {
-    //dispatch({type: 'FETCH_MASTER_ASSET', payload: id});
-    dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <div>

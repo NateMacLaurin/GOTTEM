@@ -33,9 +33,9 @@ function InventoryChart(props) {
         }
         ]
     };
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch({type: 'GET_CHART_DATA'});
-    }, [])
+    }, [])*/
 
     return (
         <div>

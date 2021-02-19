@@ -14,8 +14,8 @@ function InventoryPage(props) {
   
     //effect
   useEffect(() => {
+    dispatch({ type: 'UNSET_MASTER_ASSET_ITEM' });
     dispatch({ type: 'FETCH_MASTER_ASSETS' });
-    dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
 }, []);
 
   return (

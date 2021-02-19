@@ -20,7 +20,7 @@ function ProtectedRoute(props) {
   // prop and grabs all other props to pass them along to Route
   const {
     // redirect path to be used if the user is authorized
-    authRedirect,
+    authRedirect, notAdminRedirect, 
     ...otherProps
   } = props;
 
@@ -29,11 +29,11 @@ function ProtectedRoute(props) {
 
   let ComponentToShow;
 
+        // if the user is logged in (only logged in users have ids)
+      // show the component that is protected
   if (user.id) {
-    // if the user is logged in (only logged in users have ids)
-    // show the component that is protected
-    ComponentToShow = ComponentToProtect;
-  } else {
+      ComponentToShow = ComponentToProtect;
+    } else {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
@@ -47,6 +47,14 @@ function ProtectedRoute(props) {
     ComponentToShow = ComponentToProtect;
   }
 
+  //redirect a non-admin, logged in user for admin paths. otherwise, set the component.
+  if (!user.isAdmin && notAdminRedirect != null) {
+    return <Redirect exact from={otherProps.path} to={notAdminRedirect} />;
+  } else if (user.isAdmin){
+    ComponentToShow = ComponentToProtect;
+  }
+
+
   // We return a Route component that gets added to our list of routes
   return (
     <Route
@@ -54,6 +62,7 @@ function ProtectedRoute(props) {
       // are now passed along to the 'Route' Component
       {...otherProps}
     >
+      
       <ComponentToShow />
     </Route>
 

@@ -12,10 +12,9 @@ function AdminPage(props) {
   const baseSearchFields = useSelector((store) => store.baseSearchFields);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
-    dispatch({ type: 'FETCH_MASTER_ASSETS' });
-  }, [dispatch]);
+  //useEffect(() => {
+  //  dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
+  //}, [dispatch]);
 
   return (
     <div>

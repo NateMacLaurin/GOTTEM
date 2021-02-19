@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const {rejectUnauthenticated} = require('../modules/authentication-middleware.js');
+const {rejectUnauthenticated, rejectUnauthenticatedAdmin} = require('../modules/authentication-middleware.js');
 
 //get all assets
 
@@ -59,12 +59,14 @@ router.get('/search/query/:category/:text', rejectUnauthenticated, (req, res) =>
   const category = `"assets_master".${req.params.category}`;
   const text = `'%${req.params.text}%';`;
 
+  //TODO: send the whole %$2% as string
+
   const query = `SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
   "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
   JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
   JOIN "locations" ON "locations".id = "assets_master".location_id
   JOIN "asset_status" ON "asset_status".id = "assets_master".status_id
-  WHERE domain_name ILIKE '%PC%';`;
+  WHERE $1 ILIKE $2 ;`;
 
   pool.query(query, [category, text])
     .then( result => {
@@ -97,7 +99,7 @@ router.get('/search/base', rejectUnauthenticated, (req, res) => {
 });
 
 //add new asset
-router.post('/add', rejectUnauthenticated, (req, res) => {
+router.post('/add', rejectUnauthenticatedAdmin, (req, res) => {
   // POST route code here
   // debug server console log with post data
   console.log(`In /api/master/add POST Number: ${req.body.assetNumber}`);

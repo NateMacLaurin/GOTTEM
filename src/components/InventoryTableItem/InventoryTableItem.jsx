@@ -14,6 +14,7 @@ function InventoryTableItem({asset}) {
 
     function handleSelectItem(id) {
         console.log(`Item Clicked:${id}`);
+        
         dispatch({type: 'FETCH_MASTER_ASSET', payload: id});
             //take us to the item clicked
         history.push(`/item/${id}`);

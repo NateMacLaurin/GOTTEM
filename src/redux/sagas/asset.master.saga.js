@@ -70,8 +70,8 @@ function* editSingleAsset(action){
         console.log(`Client Response: ${editClientResponse.response}`);
             //get all assets after successful put
         yield put({type: 'FETCH_MASTER_ASSETS'});
-            //clear the master item
-        yield put({type: 'UNSET_MASTER_ASSET_ITEM'});       
+            //set the master item to the item that was just edited
+        yield put({type: 'SET_MASTER_ASSET_ITEM', payload: action.payload.id});       
     }catch(err){
         console.log(`Error editing single asset: ${err}`);
     }

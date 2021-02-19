@@ -140,6 +140,7 @@ function App() {
 
             exact
             path="/admin"
+            notAdminRedirect="/inventory"
           >
             <AdminPage />
           </ProtectedRoute>
