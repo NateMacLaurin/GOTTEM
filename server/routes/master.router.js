@@ -56,9 +56,9 @@ router.get('/search/query/:category/:text', rejectUnauthenticated, (req, res) =>
   // GET route code here
   // debug server console log
   console.log(`In /api/master/search/query/${req.params.category}/${req.params.text}' GET`);
-  console.log(`Arg 1:${req.params.category} Arg 2:${req.params.text}`);
-  const category = `"assets_master".${req.params.category}`;
-  const text = `'%${req.params.text}%';`;
+  const category = `${req.params.category}`;
+  const text = `${req.params.text}`;
+  console.log(`Arg 1:${category} Arg 2:${text}`);
 
   //TODO: send the whole %$2% as string
 
@@ -66,12 +66,12 @@ router.get('/search/query/:category/:text', rejectUnauthenticated, (req, res) =>
   "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
   JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
   JOIN "locations" ON "locations".id = "assets_master".location_id
-  JOIN "asset_status" ON "asset_status".id = "assets_master".status_id
-  WHERE $1 ILIKE $2 ;`;
+  JOIN "asset_status" ON "asset_status".id = "assets_master".status_id 
+  WHERE domain_name ILIKE 'EXAMPLE_PC';`;
 
-  pool.query(query, [category, text])
+  pool.query(query)
     .then( result => {
-      console.log(`Full Query Text: ${query}`);
+      console.log(`Full Query Text: ${query} Result: ${result.rows}`);
       res.send(result.rows);
     })
     .catch(err => {
@@ -79,6 +79,28 @@ router.get('/search/query/:category/:text', rejectUnauthenticated, (req, res) =>
       console.log('ERROR: GET searched asset', err);
       res.sendStatus(500)
     });
+});
+
+
+//get chart data
+router.get('/chart', rejectUnauthenticated, (req, res) => {
+  // debug server console log
+console.log(`In /api/master/chart GET chart data`);
+
+const query = `SELECT COUNT("asset_types".type_name) as "total_types", "asset_types".type_name FROM "assets_master" 
+JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+GROUP BY "asset_types".type_name;`;
+
+pool.query(query)
+  .then( result => {
+    console.log(`Result: ${result.rows}`)
+    res.send(result.rows);
+  })
+  .catch(err => {
+    console.log('ERROR: GET asset by ID', err);
+    res.sendStatus(500)
+  });
+
 });
 
 //get the base search strings

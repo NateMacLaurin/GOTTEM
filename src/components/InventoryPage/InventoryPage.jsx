@@ -2,28 +2,29 @@ import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import InventoryDisplay from '../InventoryTable/InventoryTable';
 import InventoryChart from '../InventoryChart/InventoryChart';
-import SearchForm from '../SearchForm/SearchForm';
+import Paper from '@material-ui/core/Paper';
 
 function InventoryPage(props) {
-    //state
-  const [heading, setHeading] = useState('Inventory Component');
     //hooks
-  const masterAssetStore = useSelector((store) => store.masterAssets);
-  const baseSearchFields = useSelector((store) => store.baseSearchFields);
+  const masterStore = useSelector((store) => store);
   const dispatch = useDispatch();
   
     //effect
   useEffect(() => {
+    dispatch({ type: 'UNSET_CHART_DATA'});
     dispatch({ type: 'UNSET_MASTER_ASSET_ITEM' });
     dispatch({ type: 'FETCH_MASTER_ASSETS' });
-}, []);
+    dispatch({ type: 'GET_CHART_DATA' });
+}, [dispatch]);
 
   return (
     <div>
-      <h2>{heading}</h2>
-      <SearchForm baseSearchFields={baseSearchFields}/>
-      <InventoryDisplay masterAssetStore={masterAssetStore}/>
-      <InventoryChart masterAssetStore={masterAssetStore}/>
+      <Paper elevation={3}>
+      <InventoryDisplay masterAssetStore={masterStore.masterAssets}/>
+      </Paper>
+      <Paper elevation={3}>
+      <InventoryChart masterChartData={masterStore.chartData}/>
+      </Paper>
     </div>
   );
 }

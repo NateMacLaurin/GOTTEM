@@ -15,16 +15,9 @@ function ItemPage(props) {
   const targetAsset = useSelector((store) => store.masterAssetItem);
     //debug log
   console.log(`ID param of redirect: ${id}`);
-    //states
-  const [heading, setHeading] = useState('Item Component');
-  const [asset, setAsset] = useState([]);
-
-  useEffect(() => {
-  }, [dispatch]);
 
   return (
     <div>
-      <h2>{heading}</h2>
       <SearchForm baseSearchFields={baseSearchFields}/>
       {targetAsset.length != 0 ? 
         <ItemDetails targetAsset={targetAsset}/>:<h1>Search for an Item to Populate</h1>

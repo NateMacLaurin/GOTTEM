@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Card, ListGroup, Button } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { Card, ListGroup } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
 
 function ItemDetails(props) {
 
-        // Using hooks we're creating local state for a "heading" variable with
-        // a default value of 'Functional Component'
-    const [heading, setHeading] = useState('ItemDetails Component');
     const [isEditing, setIsEditing] = useState(false);
         //asset editable fields
     const [assetID, setAssetID] = useState(0);
@@ -18,7 +16,7 @@ function ItemDetails(props) {
     const [assetType, setAssetType] = useState(0);
     const [assetLocation, setAssetLocation] = useState(0);
     const [assetStatus, setAssetStatus] = useState(0);
-
+    const store = useSelector((store) => store);
         //hooks
     const dispatch = useDispatch();
 
@@ -59,8 +57,6 @@ function ItemDetails(props) {
 
     return (
         <>
-        <h2>{heading}</h2>
-        
         <Card key={assetID} stype={{width: '14rem'}}>
             <Card.Body>
             {isEditing ?
@@ -123,7 +119,7 @@ function ItemDetails(props) {
                         </select>        
                     </ListGroup.Item>
                 </ListGroup>
-                <Button type="submit" onClick={handleSave}>Save</Button>
+                <Button type="submit" onClick={handleSave} variant="contained" color="primary">Save</Button>
             </>
             : 
             <>
@@ -136,11 +132,11 @@ function ItemDetails(props) {
                     <ListGroup.Item>{assetMAC}</ListGroup.Item>
                     <ListGroup.Item>{assetStatus}</ListGroup.Item>
                 </ListGroup>
-                <Button type="submit" onClick={handleEdit}>Edit</Button>
+                <Button type="submit" variant="contained" color="primary" onClick={handleEdit}>Edit</Button>
             </>
             }
                 {/*this will be a button to delete this item*/}
-                <Button className="deleteButton"type="submit" onClick={handleDelete}>Delete</Button>
+                { store.user.isAdmin ? <Button className="deleteButton" type="submit" variant="contained" color="secondary" onClick={handleDelete}>Delete</Button> : <></>}
           </Card.Body>
         </Card>
         </>

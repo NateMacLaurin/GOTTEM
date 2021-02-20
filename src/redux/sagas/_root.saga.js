@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import assetMasterSaga from './asset.master.saga';
 import searchSaga from './search.saga';
 import assetSearchedSaga from './asset.searched.saga';
+import chartDataSaga from './chart.data.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     assetMasterSaga(),
     searchSaga(),
     assetSearchedSaga(),
+    chartDataSaga()
   ]);
 }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import Button from '@material-ui/core/Button';
 
 function SearchForm(props) {
         //state
-    const [heading, setHeading] = useState('SearchForm Component');
     const [searchString, setSearchString] = useState('');
         //default the state to domain_name for consistency and no null search
     const [searchCategory, setSearchCategory] = useState('domain_name');
@@ -18,6 +18,7 @@ function SearchForm(props) {
         console.log(`handleSubmit Search - Category: ${searchCategory} String: ${searchString}`);
         dispatch({type:'GET_INVENTORY_SEARCH_QUERY', payload: {searchCategory, searchString}});
         setSearchString('');
+        dispatch({type: 'UNSET_MASTER_ASSET_ITEM'});
     };
 
     useEffect(() => {
@@ -26,7 +27,6 @@ function SearchForm(props) {
 
     return (
         <div>
-        <h2>{heading}</h2>
             <form onSubmit={handleSubmit}>
                 <span>Search:</span>
                 <input
@@ -41,7 +41,7 @@ function SearchForm(props) {
                         )
                     })}
                 </select>
-                <button type="submit">Search</button>
+                <Button type="submit" variant="contained" color="primary">Search</Button>
             </form>
         </div>
     );

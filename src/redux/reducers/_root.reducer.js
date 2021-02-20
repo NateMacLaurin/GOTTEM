@@ -6,6 +6,7 @@ import masterAssetItem from './master.asset.item.reducer';
 import baseSearchFields from './base.search.fields.reducer';
 import searchedAssets from './searched.assets.reducer';
 import usersList from './users.list.reducer';
+import chartData from './chart.data.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   baseSearchFields, //holds search fields to populate dropdown selectors
   searchedAssets, //holds an array of assets that match the search query
   usersList, //holds an array of user objects to populate into the admin page
+  chartData, //holds the inventory chart data
 });
 
 export default rootReducer;

@@ -4,10 +4,9 @@ import {Doughnut} from 'react-chartjs-2';
 import { inventoryChartColors } from './InventoryChartColors';
 
 function InventoryChart(props) {
-    
-    const store = useSelector((store) => store.masterAssets);
     const [heading, setHeading] = useState('InventoryChart Display');
     const dispatch = useDispatch();
+    const masterChartData = useSelector((store) => store.chartData);
 
     const options = {
         legend: {
@@ -24,18 +23,29 @@ function InventoryChart(props) {
     const data = {
         maintainAspectRatio: false,
         responsive: false,
-        labels: ["a", "b", "c", "d"],
+        labels: [],
         datasets: [
         {
-            data: [300, 50, 100, 50],
+            data: [],
             backgroundColor: inventoryChartColors,
             hoverBackgroundColor: inventoryChartColors
         }
         ]
     };
-    /*useEffect(() => {
-        dispatch({type: 'GET_CHART_DATA'});
-    }, [])*/
+
+    useEffect(() => {
+        dispatch({ type: 'GET_CHART_DATA' });
+        {props.masterChartData? 
+            props.masterChartData.forEach(datamap => {
+            data.labels.push(datamap.type_name);
+            data.datasets[0].data.push(parseInt(datamap.total_types));
+        }) : 
+            masterChartData.forEach(datamap => {
+            data.labels.push(datamap.type_name);
+            data.datasets[0].data.push(parseInt(datamap.total_types));
+        })}
+        
+        }, [dispatch]);
 
     return (
         <div>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 function AdminAddItemForm() {
 
     //local state variables
-  const [heading, setHeading] = useState('AdminAddItemForm Component');
-
   const [alertStatus, setAlertStatus] = useState(false);
   //const [assetName, setAssetName] = useState('NAME_HERE');
   //const [assetNumber, setAssetNumber] = useState(12345678);
@@ -14,6 +15,16 @@ function AdminAddItemForm() {
   //const [assetType, setAssetType] = useState(1);
   //const [assetLocation, setAssetLocation] = useState(1);
   //const [assetStatus, setAssetStatus] = useState(1);
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& .MuiTextField-root': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }));
+  const classes = useStyles();
 
   const [asset, setAsset] = useState({
     assetNumber: '',
@@ -49,44 +60,46 @@ function AdminAddItemForm() {
       status_id: ''    
     });
 
-    
+
 
     setAlertStatus(true);
   }
 
   return (
     <div className="addForm">
-      <h2>{heading}</h2>
       {/*this will be a form for input*/}
-      <form onSubmit={handleSubmit}>
-          <span>Local Name:</span>
-        <input
+      <form className={classes.root} noValidate onSubmit={handleSubmit}>
+        <TextField
             className="localNameField"
             value={asset.domain_name}
+            label="Domain Name"
             required
             onChange={(event) => setAsset({ ...asset, domain_name: event.target.value})}
         />
-          <br /><span>Asset Number:</span>
-        <input
+          
+        <TextField
             className="assetNumberField"
             value={asset.assetNumber}
+            label="Asset Number"
             required
             onChange={(event) => setAsset({ ...asset, assetNumber: event.target.value})}
         />
-          <br /><span>IP Address:</span>
-        <input
+         
+        <TextField
             className="assetIPField"
             value={asset.ipv4}
+            label="IP Address"
             required
             onChange={(event) => setAsset({ ...asset, ipv4: event.target.value})}
         />
-          <br /><span>MAC Address:</span>
-        <input
+          
+        <TextField
           className="assetMACField"
           value={asset.mac_addr}
+          label="MAC Address"
           required
           onChange={(event) => setAsset({ ...asset, mac_addr: event.target.value })}
-        />
+        />< br/>
         <label htmlFor="typeSelect">Type:</label>
         <select 
           className="typeSelect" 
@@ -113,7 +126,7 @@ function AdminAddItemForm() {
             <option value={4}>Ordered</option>
             <option value={5}>Retired</option>
         </select>
-        <button type="submit">Add Asset</button>
+        <Button type="submit" variant="contained" color="primary">Add Asset</Button>
         </form>
         {alertStatus ? <h1>Added!</h1> : <></> }
     </div>

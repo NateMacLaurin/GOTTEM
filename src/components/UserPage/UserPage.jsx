@@ -9,8 +9,10 @@ function UserPage() {
 
   useEffect(() => {
     dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
+    dispatch({ type: 'FETCH_MASTER_ASSETS' });
+    dispatch({ type: 'GET_CHART_DATA' });
   })
-  
+
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
