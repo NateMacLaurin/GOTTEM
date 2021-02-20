@@ -9,6 +9,8 @@ function ItemPage(props) {
   let { id } = useParams();
     //if user clicks "Item Page", default to the first item in master inventory
   id ? id=id : id=1;
+    //state
+  const [getStateID, setStateID] = useState(id);
     //hooks
   const dispatch = useDispatch();
   const baseSearchFields = useSelector((store) => store.baseSearchFields);

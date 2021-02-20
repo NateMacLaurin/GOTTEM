@@ -5,25 +5,32 @@ import InventoryChart from '../InventoryChart/InventoryChart';
 import Paper from '@material-ui/core/Paper';
 
 function InventoryPage(props) {
+  console.log('Pre-Render InventoryPage');
     //hooks
   const masterStore = useSelector((store) => store);
   const dispatch = useDispatch();
   
-    //effect
-  useEffect(() => {
-    dispatch({ type: 'UNSET_CHART_DATA'});
-    dispatch({ type: 'UNSET_MASTER_ASSET_ITEM' });
-    dispatch({ type: 'FETCH_MASTER_ASSETS' });
-    dispatch({ type: 'GET_CHART_DATA' });
-}, [dispatch]);
 
+    
+    //post render effect
+  useEffect(() => {
+      console.log('useEffect InventoryPage');
+      dispatch({ type: 'GET_CHART_DATA' });
+      dispatch({ type: 'FETCH_MASTER_ASSETS' });
+      dispatch({ type: 'UNSET_MASTER_ASSET_ITEM' });
+      return () => {
+        console.log('cleaning up InventoryPage...');
+      }
+  }, []);
+
+  console.log('Rendering... InventoryPage');
   return (
     <div>
       <Paper elevation={3}>
       <InventoryDisplay masterAssetStore={masterStore.masterAssets}/>
       </Paper>
       <Paper elevation={3}>
-      <InventoryChart masterChartData={masterStore.chartData}/>
+      <InventoryChart masterChartStore={masterStore.chartData}/>
       </Paper>
     </div>
   );

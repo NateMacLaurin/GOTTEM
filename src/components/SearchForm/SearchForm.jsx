@@ -7,7 +7,7 @@ function SearchForm(props) {
     const [searchString, setSearchString] = useState('');
         //default the state to domain_name for consistency and no null search
     const [searchCategory, setSearchCategory] = useState('domain_name');
-    const [searchBase, setSearchBase] = useState([]);
+    //const [searchBase, setSearchBase] = useState([]);
 
         //hooks
     const store = useSelector((store) => store);
@@ -20,10 +20,6 @@ function SearchForm(props) {
         setSearchString('');
         dispatch({type: 'UNSET_MASTER_ASSET_ITEM'});
     };
-
-    useEffect(() => {
-        setSearchBase(props.baseSearchFields);
-    });
 
     return (
         <div>
@@ -47,4 +43,4 @@ function SearchForm(props) {
     );
 }
 
-export default SearchForm;
+export default React.memo(SearchForm);
