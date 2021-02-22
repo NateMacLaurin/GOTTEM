@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {Button, makeStyles, Card, CardContent, TextField, Grid, Select, FormControl, MenuItem, Typography, CardActions} from '@material-ui/core';
 
 function ItemDetails(props) {
+
        //constant
     const defaultAsset = {
         assetID: 1,
@@ -40,7 +41,7 @@ function ItemDetails(props) {
     const handleSave = (event) => {
         event.preventDefault();
         console.log(`Clicked Save`);
-
+        
         asset.assetNumber = parseInt(asset.assetNumber);
         asset.type_id = parseInt(asset.type_id);
         asset.location_id = parseInt(asset.location_id);
@@ -56,12 +57,11 @@ function ItemDetails(props) {
             location_id: asset.location_id,
             status_id: asset.status_id
         }});
-
+        dispatch({type: 'UNSET_MASTER_ASSET_ITEM'});
         setIsEditing(false);
     }
 
     useEffect(() => {
-        
         setAsset({
             ...asset, 
             assetID: props.targetAsset[0]?.id,
