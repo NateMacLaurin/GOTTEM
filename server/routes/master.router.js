@@ -56,20 +56,52 @@ router.get('/search/query/:category/:text', rejectUnauthenticated, (req, res) =>
   // GET route code here
   // debug server console log
   console.log(`In /api/master/search/query/${req.params.category}/${req.params.text}' GET`);
-  const category = `"${req.params.category}"`;
-  const text = `'${req.params.text}'`;
+  const category = `${req.params.category}`;
+  let text = `${req.params.text}`;
   console.log(`Arg 1:${category} Arg 2:${text}`);
+  let query = '';
 
   //TODO: send the whole %$2% as string
+  switch(req.params.category){
+    case 'assetNumber':
+      text = parseInt(req.params.text);
+      query = `SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
+      "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
+      JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+      JOIN "locations" ON "locations".id = "assets_master".location_id
+      JOIN "asset_status" ON "asset_status".id = "assets_master".status_id 
+      WHERE "assetNumber" = $1;`;
+      break;
+    case 'domain_name':
+      query = `SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
+      "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
+      JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+      JOIN "locations" ON "locations".id = "assets_master".location_id
+      JOIN "asset_status" ON "asset_status".id = "assets_master".status_id 
+      WHERE "domain_name" LIKE $1;`;
+      break;
+    case 'ipv4':
+      query = `SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
+      "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
+      JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+      JOIN "locations" ON "locations".id = "assets_master".location_id
+      JOIN "asset_status" ON "asset_status".id = "assets_master".status_id 
+      WHERE "ipv4" ILIKE '%' || $1 || '%';`;
+      break;
+    case 'mac_addr':
+      query = `SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
+      "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
+      JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+      JOIN "locations" ON "locations".id = "assets_master".location_id
+      JOIN "asset_status" ON "asset_status".id = "assets_master".status_id 
+      WHERE "mac_addr" ILIKE '%' || $1 || '%';`;
+      break;
+    default:
+      res.sendStatus(500);
+      break;
+  }
 
-  const query = `SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
-  "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
-  JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
-  JOIN "locations" ON "locations".id = "assets_master".location_id
-  JOIN "asset_status" ON "asset_status".id = "assets_master".status_id 
-  WHERE $1 ILIKE '%' || $2 || '%';`;
-
-  pool.query(query, [category, text])
+  pool.query(query, [text])
     .then( result => {
       console.log(`Full Query Text: ${query} Result: ${result.rows}`);
       res.send(result.rows);

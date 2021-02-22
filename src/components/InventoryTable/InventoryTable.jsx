@@ -1,3 +1,4 @@
+import './InventoryTable.css';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -53,7 +54,7 @@ function InventoryTable(props) {
                     <TableBody >
             {props.masterAssetStore.map((asset) => {
                 return(
-                    <TableRow key={ asset.id } onClick={() => handleSelectItem(asset.id)}>
+                    <TableRow className={classes.root} key={ asset.id } onClick={() => handleSelectItem(asset.id)}>
                         <InventoryTableItem asset={asset}/>
                     </TableRow>
                 );
@@ -76,6 +77,6 @@ const useStyles = makeStyles((theme) => ({
         },
     header: {
         backgroundColor: '#6b6caf',
-    },
+    }
     })
 );
