@@ -156,9 +156,17 @@ SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", "added_
   JOIN "asset_status" ON "asset_status".id = "assets_master".status_id;
   
 --search form field testing
+
+SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr",
+  "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
+  JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
+  JOIN "locations" ON "locations".id = "assets_master".location_id
+  JOIN "asset_status" ON "asset_status".id = "assets_master".status_id
+  WHERE "domain_name" ILIKE '%' || 'PC' || '%';
+  
 SELECT "assets_master".id,"assetNumber","domain_name","ipv4","mac_addr", 
 "asset_types".type_name, "locations".loc_name , "asset_status".status_name FROM "assets_master"
 JOIN "asset_types" ON "asset_types".id = "assets_master".type_id
 JOIN "locations" ON "locations".id = "assets_master".location_id
 JOIN "asset_status" ON "asset_status".id = "assets_master".status_id
-WHERE domain_name ILIKE '%PC%';
+WHERE domain_name ILIKE '%' || 'EXAMPLE_PC' || '%';

@@ -1,8 +1,8 @@
 export const inventoryChartColors = [
     "#336699",
-    "#99CCFF",
-    "#999933",
-    "#666699",
+    "#FFCC00",
+    "#3399ff",
+    "#2f4b7c",
     "#CC9933",
     "#006666",
     "#3399FF",

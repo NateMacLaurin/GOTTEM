@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import InventoryDisplay from '../InventoryTable/InventoryTable';
 import InventoryChart from '../InventoryChart/InventoryChart';
 import Paper from '@material-ui/core/Paper';
+import './InventoryPage.css';
 
 function InventoryPage(props) {
   console.log('Pre-Render InventoryPage');
@@ -25,7 +26,8 @@ function InventoryPage(props) {
 
   console.log('Rendering... InventoryPage');
   return (
-    <div>
+    <div className="grid">
+      
       <Paper elevation={3}>
       <InventoryDisplay masterAssetStore={masterStore.masterAssets}/>
       </Paper>

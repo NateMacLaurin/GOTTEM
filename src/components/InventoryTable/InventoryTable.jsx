@@ -31,9 +31,9 @@ function InventoryTable(props) {
                     <TableHead>
                         <TableRow>
                             <TableCell>Asset Number</TableCell>
-                            <TableCell>Domain Name</TableCell>
+                            {/* <TableCell>Domain Name</TableCell>
                             <TableCell>IP Address</TableCell>
-                            <TableCell>MAC Address</TableCell>
+                            <TableCell>MAC Address</TableCell> */}
                             <TableCell>Asset Type</TableCell>
                             <TableCell>Location</TableCell>
                             <TableCell>Status</TableCell>
@@ -51,7 +51,6 @@ function InventoryTable(props) {
                 </Table>
             </TableContainer>
         </section>
-        {/* Chart.js display here */}
         </div>
     );
 }
