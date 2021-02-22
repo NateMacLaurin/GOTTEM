@@ -63,6 +63,7 @@ function* deleteSingleAsset(action){
 function* editSingleAsset(action){
     //debug log
     console.log(`In editSingleAsset Saga at:`, action.payload);
+    const id = action.payload.assetID;
     try{
             //POST the action.payload to server
         const editClientResponse = yield axios.put(`/api/master/edit`, action.payload );
@@ -71,7 +72,7 @@ function* editSingleAsset(action){
             //get all assets after successful put
         yield put({type: 'FETCH_MASTER_ASSETS'});
             //set the master item to the item that was just edited
-        yield put({type: 'FETCH_MASTER_ASSET', payload: action.payload.id});       
+        yield put({type: 'FETCH_MASTER_ASSET', payload: id});       
     }catch(err){
         console.log(`Error editing single asset: ${err}`);
     }

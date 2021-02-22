@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {Button, makeStyles, Card, CardContent, TextField, Grid, Select, FormControl, MenuItem, Typography, CardActions} from '@material-ui/core';
-import './ItemDetails.css';
 
 function ItemDetails(props) {
        //constant
@@ -35,10 +34,11 @@ function ItemDetails(props) {
 
     const handleDelete = () => {
         console.log(`Clicked Delete`);
-        dispatch({type: 'DELETE_ASSET', payload: assetID});
+        dispatch({type: 'DELETE_ASSET', payload: asset.assetID});
     }
 
-    const handleSave = () => {
+    const handleSave = (event) => {
+        event.preventDefault();
         console.log(`Clicked Save`);
 
         asset.assetNumber = parseInt(asset.assetNumber);
@@ -46,13 +46,22 @@ function ItemDetails(props) {
         asset.location_id = parseInt(asset.location_id);
         asset.status_id = parseInt(asset.status_id);
 
-        dispatch({type: 'EDIT_ASSET', payload: asset});
+        dispatch({type: 'EDIT_ASSET', payload: {
+            assetID: asset.assetID,
+            assetNumber: asset.assetNumber,
+            domain_name: asset.domain_name,
+            ipv4: asset.ipv4,
+            mac_addr: asset.mac_addr,
+            type_id: asset.type_id,
+            location_id: asset.location_id,
+            status_id: asset.status_id
+        }});
 
         setIsEditing(false);
     }
 
     useEffect(() => {
-
+        
         setAsset({
             ...asset, 
             assetID: props.targetAsset[0]?.id,
@@ -71,8 +80,8 @@ function ItemDetails(props) {
             <Card className={classes.root}>
                 <CardContent>
                 {isEditing ?
-                    <form className={classes.root} noValidate onSubmit={handleSave}>
-                    <Grid container spacing={2} alignItems="stretch" justify="flex-start" direction="row" xs={12}>
+                    <form className={classes.root} noValidate onSubmit={(event) => handleSave(event)}>
+                    <Grid container spacing={2} alignItems="stretch" justify="flex-start" direction="row">
                         <Grid item xs={6}>
                         <TextField
                             id="assetNumberInput"
