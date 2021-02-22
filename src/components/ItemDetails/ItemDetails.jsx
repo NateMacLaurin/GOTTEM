@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, ListGroup } from 'react-bootstrap';
-import Button from '@material-ui/core/Button';
+import {Paper, Button} from '@material-ui/core';
+import TitlePaper from '../TitlePaper/TitlePaper';
+import './ItemDetails.css';
 
 function ItemDetails(props) {
 
@@ -56,7 +58,11 @@ function ItemDetails(props) {
     }, [])
 
     return (
-        <>
+        <div className="itemCard">
+            <div className="inventoryPaperTitle">
+                <TitlePaper className="title" title={'Details'}/>
+            </div>
+            <Paper>
         <Card key={assetID} stype={{width: '14rem'}}>
             <Card.Body>
             {isEditing ?
@@ -139,7 +145,8 @@ function ItemDetails(props) {
                 { store.user.isAdmin ? <Button className="deleteButton" type="submit" variant="contained" color="secondary" onClick={handleDelete}>Delete</Button> : <></>}
           </Card.Body>
         </Card>
-        </>
+        </Paper>
+        </div>
     );
 }
 

@@ -8,11 +8,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import {makeStyles} from '@material-ui/core';
 
 function AdminManageUsers(props) {
     const thisUser = useSelector((store) => store.user);
     const userStore = useSelector((store) => store.usersList);
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_USERS' });
@@ -34,10 +36,10 @@ function AdminManageUsers(props) {
                 <TableCell>Admin Status</TableCell>
             </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody >
             {userStore.map((user) => (
                 (thisUser.id != user.id) ?
-                    <TableRow key={ user.id }>
+                    <TableRow key={ user.id } className={classes.root}>
                         <TableCell component="th" scope="row">
                             { user.username }
                         </TableCell>
@@ -65,3 +67,12 @@ function AdminManageUsers(props) {
 }
 
 export default AdminManageUsers;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '&:nth-child(even)': {
+            backgroundColor: '#e1eaea'
+        },
+        },
+    })
+);

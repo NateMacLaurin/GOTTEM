@@ -1,48 +1,31 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Button, makeStyles, TextField, Grid, Select, FormControl, MenuItem }  from '@material-ui/core';
 
 function AdminAddItemForm() {
-
-    //local state variables
-  const [alertStatus, setAlertStatus] = useState(false);
-  //const [assetName, setAssetName] = useState('NAME_HERE');
-  //const [assetNumber, setAssetNumber] = useState(12345678);
-  //const [assetIP, setAssetIP] = useState('123.456.789.123');
-  //const [assetMAC, setAssetMAC] = useState('12-34-56-78-90-AB');
-  //const [assetType, setAssetType] = useState(1);
-  //const [assetLocation, setAssetLocation] = useState(1);
-  //const [assetStatus, setAssetStatus] = useState(1);
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-    },
-  }));
-  const classes = useStyles();
-
-  const [asset, setAsset] = useState({
+    //constant
+  const defaultAsset = {
     assetNumber: '',
     domain_name: '',
     ipv4: '',
     mac_addr: '',
-    type_id: '',
-    location_id: '',
-    status_id: '' 
-  });
+    type_id: 1,
+    location_id: 1,
+    status_id: 1    
+  }
+    //local state variables
+  const [alertStatus, setAlertStatus] = useState(false);
+
+  const [asset, setAsset] = useState(defaultAsset);
 
     //hooks
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const handleSubmit = (e) => {
 
     e.preventDefault();
-    //cast ints
+      //cast ints
     asset.assetNumber = parseInt(asset.assetNumber);
     asset.type_id = parseInt(asset.type_id);
     asset.location_id = parseInt(asset.location_id);
@@ -50,17 +33,7 @@ function AdminAddItemForm() {
 
     dispatch({type: 'POST_NEW_ASSET', payload: asset});
 
-    setAsset({
-      assetNumber: '',
-      domain_name: '',
-      ipv4: '',
-      mac_addr: '',
-      type_id: '',
-      location_id: '',
-      status_id: ''    
-    });
-
-
+    setAsset(defaultAsset);
 
     setAlertStatus(true);
   }
@@ -69,64 +42,108 @@ function AdminAddItemForm() {
     <div className="addForm">
       {/*this will be a form for input*/}
       <form className={classes.root} noValidate onSubmit={handleSubmit}>
-        <TextField
-            className="localNameField"
-            value={asset.domain_name}
-            label="Domain Name"
-            required
-            onChange={(event) => setAsset({ ...asset, domain_name: event.target.value})}
-        />
-          
-        <TextField
-            className="assetNumberField"
-            value={asset.assetNumber}
-            label="Asset Number"
-            required
-            onChange={(event) => setAsset({ ...asset, assetNumber: event.target.value})}
-        />
-         
-        <TextField
-            className="assetIPField"
-            value={asset.ipv4}
-            label="IP Address"
-            required
-            onChange={(event) => setAsset({ ...asset, ipv4: event.target.value})}
-        />
-          
-        <TextField
-          className="assetMACField"
-          value={asset.mac_addr}
-          label="MAC Address"
-          required
-          onChange={(event) => setAsset({ ...asset, mac_addr: event.target.value })}
-        />< br/>
-        <label htmlFor="typeSelect">Type:</label>
-        <select 
-          className="typeSelect" 
-          value={asset.type_id} 
-          onChange={(event) => setAsset({ ...asset, type_id: event.target.value })}
-        >
-          <option value={1}>Desktop PC</option>
-          <option value={2}>Laptop Macintosh</option>
-          <option value={3}>Laptop PC</option>
-          <option value={4}>Phone</option>
-        </select>
-        <label htmlFor="locationSelect">Location:</label>
-        <select className="locationSelect" value={asset.location_id} onChange={(event) => setAsset({ ...asset, location_id: event.target.value })}>
-            <option value={1}>Main Office 100 Big Chungus Dr</option>
-            <option value={2}>Sattelite Office 110 Enterprise Pkwy</option>
-            <option value={2}>New Branch 123 Main Street</option>
-            <option value={4}>Work From Home</option>
-        </select>
-        <label htmlFor="statusSelect">Status:</label>
-        <select className="statusSelect" value={asset.status_id} onChange={(event) => setAsset({...asset, status_id: event.target.value })}>
-            <option value={1}>In Use</option>
-            <option value={2}>In Inventory</option>
-            <option value={3}>Awaiting Repair</option>
-            <option value={4}>Ordered</option>
-            <option value={5}>Retired</option>
-        </select>
+        <Grid container spacing={2} alignItems="stretch" justify="space-evenly" direction="row">
+          <Grid item>
+            <TextField
+              id="assetNumberInput"
+              type="number"
+              label="Asset Number"
+              required
+              variant="outlined"
+              value={asset.assetNumber}
+              onChange={(event) => setAsset({ ...asset, assetNumber: event.target.value})}
+            />
+         </Grid>
+         <Grid item>
+            <TextField
+              id="DomainNameInput"
+              type="text"
+              label="Domain Name"
+              required
+              variant="outlined"
+              value={asset.domain_name}
+              onChange={(event) => setAsset({ ...asset, domain_name: event.target.value})}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              id="iPInput"
+              type="text"
+              label="IP Address"
+              required
+              variant="outlined"
+              value={asset.ipv4}
+              onChange={(event) => setAsset({ ...asset, ipv4: event.target.value})}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              id="mACInput"
+              type="text"
+              label="MAC Address"
+              required
+              variant="outlined"
+              value={asset.mac_addr}
+              onChange={(event) => setAsset({ ...asset, mac_addr: event.target.value })}
+            />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2} alignItems="stretch" justify="space-evenly" direction="column">
+          <Grid item>
+            <FormControl>
+              <Select 
+                id="typeSelect" 
+                type="number"
+                label="Asset Type"
+                required
+                value={asset.type_id} 
+                onChange={(event) => setAsset({ ...asset, type_id: event.target.value })}
+              >
+                <MenuItem value={1}>Desktop PC</MenuItem>
+                <MenuItem value={2}>Laptop PC</MenuItem>
+                <MenuItem value={3}>Laptop Mac</MenuItem>
+                <MenuItem value={4}>Tablet</MenuItem>
+                <MenuItem value={5}>Phone</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControl>
+              <Select
+                id="locationSelect" 
+                type="number"
+                label="Location Address"
+                required
+                value={asset.location_id} 
+                onChange={(event) => setAsset({ ...asset, location_id: event.target.value })}
+                >
+                <MenuItem value={1}>Main Office 100 Big Chungus Dr</MenuItem>
+                <MenuItem value={2}>Sattelite Office 110 Enterprise Pkwy</MenuItem>
+                <MenuItem value={3}>New Branch 123 Main Street</MenuItem>
+                <MenuItem value={4}>Work From Home</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControl>
+              <Select 
+                id="statusSelect"
+                type="number"
+                label="Status"
+                required
+                value={asset.status_id} 
+                onChange={(event) => setAsset({...asset, status_id: event.target.value })}
+              >
+                  <MenuItem value={1}>In Use</MenuItem>
+                  <MenuItem value={2}>In Inventory</MenuItem>
+                  <MenuItem value={3}>Awaiting Repair</MenuItem>
+                  <MenuItem value={4}>Ordered</MenuItem>
+                  <MenuItem value={5}>Retired</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
         <Button type="submit" variant="contained" color="primary">Add Asset</Button>
+        </Grid>
         </form>
         {alertStatus ? <h1>Added!</h1> : <></> }
     </div>
@@ -134,3 +151,15 @@ function AdminAddItemForm() {
 }
 
 export default AdminAddItemForm;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      width: '30ch',
+    },
+    '& .MuiSelect-root': {
+      width: '30ch',
+    }
+    },
+  })
+);

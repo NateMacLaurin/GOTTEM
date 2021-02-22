@@ -8,7 +8,6 @@ function UserPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'GET_SEARCH_FIELDS_BASE' });
     dispatch({ type: 'FETCH_MASTER_ASSETS' });
     dispatch({ type: 'GET_CHART_DATA' });
   })
@@ -17,6 +16,7 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
+      {user.isAdmin ? <p>You have administrative authorization.</p> : <></>}
       <LogOutButton className="btn" />
     </div>
   );

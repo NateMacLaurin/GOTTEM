@@ -1,10 +1,25 @@
-.grid{
+.inventoryPaper{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    color: white;
+}
+
+.inventoryPaper > div{
+    background:rgb(201, 209, 238);
+    padding:1em;
+}
+
+.inventoryPaperTitle{
     display:grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1em;
 }
 
-.grid > div{
-    background:lightgrey;
-    padding:1em;
+.inventoryPaperTitle > div{
+    background: #6b6caf;
+}
+
+.inventoryContainer{
+    margin: 2em;
 }

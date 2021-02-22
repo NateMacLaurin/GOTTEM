@@ -9,7 +9,7 @@ function InventoryChart(props) {
 
     const options = {
         legend: {
-        display: false,
+        display: true,
         position: "right"
         },
         elements: {

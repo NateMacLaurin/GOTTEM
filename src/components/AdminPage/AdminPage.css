@@ -1,0 +1,24 @@
+.adminThreeGrid{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+}
+
+.adminThreeGrid > div{
+    background:rgb(201, 209, 238);
+    padding:1em;
+}
+
+.adminThreeGridTitle{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+}
+
+.adminThreeGridTitle > div{
+    background: #6b6caf;
+}
+
+.adminContainer{
+    margin: 2em;
+}

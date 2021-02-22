@@ -3,10 +3,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import InventoryDisplay from '../InventoryTable/InventoryTable';
 import InventoryChart from '../InventoryChart/InventoryChart';
 import Paper from '@material-ui/core/Paper';
+import SearchForm from '../SearchForm/SearchForm';
+import TitlePaper from '../TitlePaper/TitlePaper';
 import './InventoryPage.css';
 
 function InventoryPage(props) {
   console.log('Pre-Render InventoryPage');
+
     //hooks
   const masterStore = useSelector((store) => store);
   const dispatch = useDispatch();
@@ -26,14 +29,21 @@ function InventoryPage(props) {
 
   console.log('Rendering... InventoryPage');
   return (
-    <div className="grid">
-      
+    <div className = "inventoryContainer">
+    <div className="inventoryPaperTitle">
+        <TitlePaper className="title" title={'Master Asset List'}/>
+        <TitlePaper className="title" title={'Master Inventory Chart'}/>
+    </div>
+    <div className="inventoryPaper">
       <Paper elevation={3}>
+      <SearchForm />
+      <br />
       <InventoryDisplay masterAssetStore={masterStore.masterAssets}/>
       </Paper>
       <Paper elevation={3}>
       <InventoryChart masterChartStore={masterStore.chartData}/>
       </Paper>
+    </div>
     </div>
   );
 }

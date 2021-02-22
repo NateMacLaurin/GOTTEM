@@ -9,11 +9,18 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
+import {makeStyles} from '@material-ui/core';
+import ItemDialog from '../ItemDialog/ItemDialog.jsx';
 
 function InventoryTable(props) {
+        //state
+    const [open, setOpen] = useState(false);
 
+        //hooks
     const history = useHistory();
     const dispatch = useDispatch();
+    const classes = useStyles();
+    
 
     function handleSelectItem(id) {
         console.log(`Item Clicked:${id}`);
@@ -23,13 +30,17 @@ function InventoryTable(props) {
         history.push(`/item/${id}`);
     }
 
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <div>
         <section className="masterTable">
             <TableContainer component={Paper}>
-                <Table aria-label="simple table">
+                <Table aria-label="simple table" >
                     <TableHead>
-                        <TableRow>
+                        <TableRow className={classes.header}>
                             <TableCell>Asset Number</TableCell>
                             {/* <TableCell>Domain Name</TableCell>
                             <TableCell>IP Address</TableCell>
@@ -39,10 +50,10 @@ function InventoryTable(props) {
                             <TableCell>Status</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody >
             {props.masterAssetStore.map((asset) => {
                 return(
-                    <TableRow key={ asset.id } onClick={() => {handleSelectItem(asset.id)}}>
+                    <TableRow key={ asset.id } onClick={() => handleSelectItem(asset.id)}>
                         <InventoryTableItem asset={asset}/>
                     </TableRow>
                 );
@@ -50,9 +61,21 @@ function InventoryTable(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </section>
+        </section>  
         </div>
     );
 }
 
 export default InventoryTable;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '&:nth-child(even)': {
+            backgroundColor: '#e1eaea'
+        },
+        },
+    header: {
+        backgroundColor: '#6b6caf',
+    },
+    })
+);
