@@ -194,17 +194,17 @@ function ItemDetails(props) {
                     {asset.domain_name}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                    {asset.type_name}
+                    {asset.ipv4}
                     <br />
-                    {asset.status_name}
+                    {asset.mac_addr}
                     </Typography>
                     <Typography variant="body1" component="p">
                     {asset.location_name}
                     </Typography>
                     <Typography variant="body2" component="p">
-                    {asset.ipv4}
+                    {asset.type_name}
                     <br />
-                    {asset.mac_addr}
+                    {asset.status_name}
                     </Typography>
                     <CardActions>
                         <Button type="submit" variant="contained" color="primary" onClick={handleEdit}>Edit</Button>
@@ -214,7 +214,6 @@ function ItemDetails(props) {
             }
             </CardContent>
         </Card>
-        
         </div>
     );
 }

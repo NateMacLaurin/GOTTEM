@@ -55,7 +55,7 @@ function AdminManageUsers(props) {
                         { user.username }
                     </TableCell>
                     <TableCell>{ user.id }</TableCell>
-                    <TableCell>Can't Toggle Yourself!</TableCell>
+                    <TableCell>This is you.</TableCell>
                 </TableRow> 
                 
             ))}

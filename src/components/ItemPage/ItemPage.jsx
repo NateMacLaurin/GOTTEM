@@ -28,7 +28,7 @@ function ItemPage(props) {
             <SearchForm />
             {targetAsset.length != 0 ? 
               <ItemDetails targetAsset={targetAsset}/>: 
-              <h1>Search for an Item to Populate</h1>
+              <h2>Search for an Asset</h2>
             }
         </Paper>
       </div>

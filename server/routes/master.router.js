@@ -100,7 +100,6 @@ router.get('/search/query/:category/:text', rejectUnauthenticated, (req, res) =>
       res.sendStatus(500);
       break;
   }
-
   pool.query(query, [text])
     .then( result => {
       console.log(`Full Query Text: ${query} Result: ${result.rows}`);

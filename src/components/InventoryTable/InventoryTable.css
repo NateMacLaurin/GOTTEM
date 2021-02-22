@@ -1,3 +1,5 @@
 .MuiTableCell-head {
-    color: #FFFFFF
+    color: #FFFFFF !important;
+    font-weight: 1000 !important;
+    background-color: #6b6caf !important;
 }
