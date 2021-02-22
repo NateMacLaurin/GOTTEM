@@ -1,0 +1,25 @@
+.itemPaper{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    color: white;
+}
+
+.itemPaper > div{
+    background:rgb(201, 209, 238);
+    padding:1em;
+}
+
+.itemPaperTitle{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+}
+
+.itemPaperTitle > div{
+    background: #6b6caf;
+}
+
+.itemContainer{
+    margin: 2em;
+}
