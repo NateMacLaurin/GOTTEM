@@ -1,5 +1,5 @@
 # The General Organizational Tech Tracker (GOTT)
-##Description
+## Description
 Duration: 2 Week Sprint
 
 GOTT is a lightweight desktop web application for IT asset management. The application features a full CRUD RESTful API with search and data visualization, as well as multiple authorization levels. 
