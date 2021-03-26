@@ -13,7 +13,9 @@ To see the fully functional site, please visit: [GOTT - Heroku](https://gottem.h
 
 ## Prerequisites
 [PostgreSQL](https://www.postgresql.org/)
+
 [Postico - macOS](https://eggerapps.at/postico/) OR [pgAdmin - Windows](https://www.pgadmin.org/)
+
 [Node.js](https://nodejs.org/en/)
 
 ## Installation
