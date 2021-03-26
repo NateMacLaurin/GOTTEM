@@ -11,6 +11,10 @@ To see the fully functional site, please visit: [GOTT - Heroku](https://gottem.h
 ## Screen Shot
 ![GOTT](https://user-images.githubusercontent.com/42681678/112639815-aee71c00-8e0e-11eb-8e10-0426528abf37.JPG)
 
+## Prerequisites
+[PostgreSQL](https://www.postgresql.org/)
+[Postico - macOS](https://eggerapps.at/postico/) OR [pgAdmin - Windows](https://www.pgadmin.org/)
+[Node.js](https://nodejs.org/en/)
 
 ## Installation
 Clone the repo and open in your favorite javascript IDE.
