@@ -42,6 +42,19 @@ npm run client
 in your terminal
 The npm run client command will open up a new browser tab for you!
 
+## Usage
+
+1. Registration/Login: All users are required to register or login to access to app.
+2. After registration, users will be redirected to the About Page which displays a brief summary of GOTT in plaintext.
+3. Users may navigate through GOTT via the nav bar at the top of the page.
+4. Inventory Page - This page displays all available assets on the left and a table summary of each asset type on the right by default.
+5. Inventory Page - Users may search for specific assets by multiple values.
+6. Item Page - Search results display on the Item page.
+7. Admin Page - (Requires Admin Authroization) Used for editing and deleting assets, as well as user account management.
+
+## Built With
+React, Redux, Node, Express, PostgreSQL, Passport, and Chart.js
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
