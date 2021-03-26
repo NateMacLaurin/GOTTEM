@@ -33,12 +33,9 @@ Open up your IDE of choice and run
 npm install
 ```
 (Details are in package.json)
-Run
 ```
 npm run server
 ```
-in your terminal
-Run 
 ```
 npm run client
 ```
