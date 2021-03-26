@@ -48,7 +48,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Acknowledgement
-Thanks to [Prime Digital Academy](primeacademy.io) who equipped and helped me to make this application a reality.
+Thanks to [Prime Digital Academy](https://primeacademy.io) who equipped and helped me to make this application a reality.
 
 ## Support
 If you have suggestions or issues, please email me at youremail@whatever.com
