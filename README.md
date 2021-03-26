@@ -19,15 +19,6 @@ To see the fully functional site, please visit: [GOTT - Heroku](https://gottem.h
 [Node.js](https://nodejs.org/en/)
 
 ## Installation
-Clone the repo and open in your favorite javascript IDE.
-Install dependencies with the Node runtime:
-```
-npm install
-```
-(Details are in package.json)
-
-Installation
-
 Create a .env in the root directory with the following keys:
 ```
 SERVER_SESSION_SECRET : Utilized for Heroku deployment; requires 8 char min.
@@ -37,9 +28,15 @@ PG_SECRET : PostgreSQL DB password (if required)
 
 Create a database named your database name,
 The queries in the database.sql file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on Postgres, so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries,
-Open up your editor of choice and run an npm install
+Open up your IDE of choice and run
+```
+npm install
+```
+(Details are in package.json)
 Run
-```npm run server```
+```
+npm run server
+```
 in your terminal
 Run 
 ```
