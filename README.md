@@ -8,7 +8,7 @@ Technologies Used: React, Redux, Node, Express, PostgreSQL, Passport, Chart.js
 
 To see the fully functional site, please visit: [GOTT - Heroku](https://gottem.herokuapp.com/)
 
-## Screen Shot
+## Screenshot
 ![GOTT](https://user-images.githubusercontent.com/42681678/112639815-aee71c00-8e0e-11eb-8e10-0426528abf37.JPG)
 
 ## Prerequisites
